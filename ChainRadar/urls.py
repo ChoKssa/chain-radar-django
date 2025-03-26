@@ -19,9 +19,11 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import include, path
 
+app_name = "ChainRadar"
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("", include("general.urls")),
+    path("", include("user.urls")),
 ]
 
 if settings.DEBUG:
