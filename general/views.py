@@ -1,0 +1,14 @@
+from django.shortcuts import render
+
+
+def index(request):
+    context = {}
+    return render(request, "general/home.html", context)
+
+def contact(request):
+    context = {}
+    return render(request, "general/contact.html", context)
+
+def about(request):
+    context = {}
+    return render(request, "general/about.html", context)

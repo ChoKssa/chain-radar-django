@@ -1,0 +1,59 @@
+{% extends 'base.html' %} {% load static %}
+
+{% block styles %}
+<link
+	rel="stylesheet"
+	href="{% static 'general/css/index.css' %}"
+/>
+{% endblock %}
+
+{% block content %}
+<main>
+	<!-- Presentation section with a brief introduction -->
+	<section class="presentation">
+		<h1>Stay Ahead in the Crypto World</h1>
+		<p>
+			Real-time prices, market trends, and insights for smarter
+			investments.
+		</p>
+	</section>
+
+	<!-- Features section highlighting key functionalities -->
+	<section class="features">
+		<div class="feature">
+			<img
+				src="{% static 'images/icons/price.png' %}"
+				alt="Price Tracker icon"
+			/>
+			<h3>Live Price Tracker</h3>
+			<p>Get real-time updates on cryptocurrency prices.</p>
+		</div>
+		<div class="feature">
+			<img
+				src="{% static 'images/icons/article.png' %}"
+				alt="Market News icon"
+			/>
+			<h3>Market News</h3>
+			<p>Stay informed with the latest news and trends.</p>
+		</div>
+		<div class="feature">
+			<img
+				src="{% static 'images/icons/comparator.png' %}"
+				alt="Tools"
+			/>
+			<h3>Crypto Comparator</h3>
+			<p>
+				Compare the price and performance of your favorite
+				cryptocurrencies.
+			</p>
+		</div>
+	</section>
+
+	<!-- Call-to-action (CTA) section encouraging user sign-ups -->
+	<section class="cta">
+		<h2>Join the Crypto Revolution</h2>
+		<p>Sign up today and start tracking your favorite cryptocurrencies.</p>
+		<a href="./signup">Get Started</a>
+	</section>
+</main>
+{% endblock %}

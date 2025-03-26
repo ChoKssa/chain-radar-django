@@ -1,0 +1,84 @@
+/* General body styles */
+body {
+	margin: 0;
+	font-family: Arial, sans-serif;
+	background-color: #f4f4f9;
+	color: #333;
+	height: 100vh;
+	display: flex;
+	flex-direction: column;
+}
+
+/* Main content styling */
+main {
+	flex: 1;
+	padding: 2rem;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	text-align: center;
+}
+
+/* About page header styling */
+.about-header {
+	margin-bottom: 2rem;
+}
+
+.about-header h1 {
+	font-size: 2.5rem;
+	margin-bottom: 0.5rem;
+}
+
+.about-header p {
+	font-size: 1.2rem;
+	color: #666;
+}
+
+/* About content styling */
+.about-content {
+	max-width: 800px;
+	margin: 0 auto;
+	line-height: 1.6;
+	font-size: 1rem;
+	color: #555;
+}
+
+/* Creator section styling */
+.about-creator {
+	margin-top: 2rem;
+	text-align: center;
+}
+
+/* Creator profile image styling */
+.creator-info img {
+	width: 120px;
+	height: auto;
+	border-radius: 50%;
+	margin-bottom: 1rem;
+}
+
+/* Creator name styling */
+.creator-info h3 {
+	margin: 0.5rem 0;
+	font-size: 1.5rem;
+}
+
+/* Creator description styling */
+.creator-info p {
+	margin: 0.5rem 0;
+	font-size: 1rem;
+	color: #777;
+}
+
+/* Social links styling */
+.social-links a {
+	margin: 0 0.5rem;
+	text-decoration: none;
+	color: #ff6f61;
+	font-size: 1.2rem;
+}
+
+/* Hover effect for social links */
+.social-links a:hover {
+	color: #ff5743;
+}
