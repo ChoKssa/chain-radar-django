@@ -1,0 +1,46 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<!-- Meta tags for character encoding and responsive design -->
+		<meta charset="UTF-8" />
+		<meta
+			name="viewport"
+			content="width=device-width, initial-scale=1.0"
+		/>
+
+		<!-- Page title -->
+		<title>{% block title %}ChainRadar{% endblock %}</title>
+
+		<!-- Favicon (Website icon) -->
+		<link
+			rel="icon"
+			href="{% static 'images/icons/chain_radar.png' %}"
+			type="image/png"
+		/>
+
+		<!-- Stylesheets for different sections of the site -->
+		{% block styles %}{% endblock %}
+		<link
+			rel="stylesheet"
+			href="{% static 'css/navbar.css' %}"
+		/>
+		<link
+			rel="stylesheet"
+			href="{% static 'css/footer.css' %}"
+		/>
+
+		<!-- Custom scripts for additional functionality -->
+		{% block scripts %}{% endblock %}
+		<script src="{% static 'js/menu.js' %}" defer></script>
+	</head>
+	<body>
+		<!-- Navbar -->
+		{% include 'navbar.html' %}
+		{% include 'menu.html' %}
+		<!-- Content -->
+		{% block content %}{% endblock %}
+		<!-- Footer -->
+		{% include 'footer.html' %}
+	</body>
+</html>

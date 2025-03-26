@@ -1,0 +1,124 @@
+/* Header styling */
+header {
+	background-color: #222;
+	color: #fff;
+	padding: 1rem 2rem;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+header .navbar {
+	display: flex;
+	align-items: center;
+}
+
+header .burger-menu {
+	user-select: none;
+	margin-right: 20px;
+}
+
+header .burger-menu:hover {
+	cursor: pointer;
+}
+
+/* Logo styling */
+header .logo {
+	font-size: 1.5rem;
+	font-weight: bold;
+}
+
+header .logo a {
+	color: #fff;
+	text-decoration: none;
+}
+
+/* Navigation menu styling */
+header nav {
+	display: flex;
+	align-items: center;
+}
+
+header nav a {
+	color: #fff;
+	text-decoration: none;
+	margin: 0 1rem;
+	font-size: 1rem;
+}
+
+header nav a:hover {
+	text-decoration: underline;
+}
+
+/* Authentication buttons styling */
+.auth-buttons a {
+	color: #fff;
+	background-color: #ff6f61;
+	text-decoration: none;
+	padding: 0.5rem 1rem;
+	margin-left: 0.5rem;
+	border-radius: 4px;
+	font-size: 1rem;
+}
+
+.auth-button a {
+	color: #000;
+}
+.auth-buttons a:hover {
+	background-color: #ff5743;
+	text-decoration: none;
+}
+
+/* Login button specific styling */
+.auth-buttons .login {
+	background-color: #333;
+}
+
+.auth-buttons .login:hover {
+	background-color: rgba(70, 70, 70, 1);
+}
+
+.menu {
+	position: absolute;
+	top: 50px;
+	left: -250px;
+	width: 200px;
+	background: #222;
+	padding: 10px;
+	border-radius: 5px;
+	transition: left 0.3s ease-in-out;
+}
+
+.menu a {
+	display: block;
+	color: white;
+	padding: 10px;
+	text-decoration: none;
+	margin-bottom: 10px;
+}
+
+.menu .auth-buttons a {
+	display: none;
+}
+
+.menu a:hover {
+	background: #444;
+}
+
+.menu-open {
+	left: 0px;
+}
+
+.menu-close {
+	left: -250px;
+}
+
+@media (max-width: 700px) {
+	header .auth-buttons a {
+		display: none;
+	}
+
+	.menu .auth-buttons a {
+		display: block;
+	}
+}
