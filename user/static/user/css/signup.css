@@ -1,0 +1,194 @@
+/* General body styles */
+body {
+	margin: 0;
+	font-family: Arial, sans-serif;
+	background-color: #f4f4f9;
+	color: #333;
+	height: 100vh;
+	display: flex;
+	flex-direction: column;
+}
+
+/* Main content styling */
+main {
+	flex: 1;
+	padding: 2rem;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+
+/* Signup header styling */
+.signup-header {
+	text-align: center;
+	margin-bottom: 2rem;
+}
+
+.signup-header h1 {
+	font-size: 2.5rem;
+	margin-bottom: 0.5rem;
+}
+
+.signup-header p {
+	font-size: 1.2rem;
+	color: #666;
+}
+
+/* Updated Signup Form Layout */
+.signup-form {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 1rem;
+	max-width: 600px;
+	background: #fff;
+	padding-right: 3rem;
+	padding-left: 3rem;
+	padding-top: 2rem;
+	padding-bottom: 2rem;
+	border-radius: 8px;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+	width: 100%;
+}
+
+/* Align labels and inputs */
+.signup-form label {
+	grid-column: span 1;
+	font-weight: bold;
+	align-self: center;
+}
+
+.signup-form input,
+.signup-form select,
+.signup-form textarea {
+	width: 100%;
+	padding: 0.75rem;
+	border: 1px solid #ddd;
+	border-radius: 4px;
+	font-size: 1rem;
+	resize: none;
+}
+
+.password-wrapper {
+	display: flex;
+	align-items: center;
+	gap: 1rem;
+}
+
+.show-password,
+.hide-password {
+	cursor: pointer;
+}
+
+.show-password.hidden,
+.hide-password.hidden {
+	display: none;
+}
+
+/* Make some fields span two columns */
+.signup-form input[type="file"],
+.signup-form textarea {
+	grid-column: span 2;
+}
+
+/* Align the submit button */
+.signup-form button {
+	grid-column: span 2;
+	padding: 0.75rem 1.5rem;
+	font-size: 1rem;
+	color: #fff;
+	background-color: #ff6f61;
+	border: none;
+	border-radius: 4px;
+	cursor: pointer;
+	width: 100%;
+	text-align: center;
+}
+
+.signup-form button:hover {
+	background-color: #ff5743;
+}
+
+.file-input-wrapper {
+	grid-column: span 2;
+	position: relative;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background: #f4f4f9;
+	padding: 10px;
+	border: 2px dashed #ccc;
+	border-radius: 5px;
+	cursor: pointer;
+}
+.file-input-wrapper input {
+	opacity: 0;
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	cursor: pointer;
+}
+.file-input-wrapper span {
+	color: #666;
+	font-size: 1rem;
+}
+
+/* Responsive Design */
+@media (max-width: 500px) {
+	.signup-form {
+		grid-template-columns: 1fr;
+	}
+
+	.signup-form label {
+		grid-column: span 1;
+	}
+
+	.signup-form button {
+		grid-column: span 1;
+	}
+}
+
+.signup-form button:hover {
+	background-color: #ff5743;
+}
+
+/* Login link styling */
+.login-link {
+	margin-top: 1rem;
+	font-size: 0.9rem;
+}
+
+.login-link a {
+	color: #ff6f61;
+	text-decoration: none;
+}
+
+.login-link a:hover {
+	text-decoration: underline;
+}
+
+.accounts-table {
+	width: 80%;
+	border-collapse: collapse;
+	margin-top: 2rem;
+}
+
+.accounts-table thead {
+	background-color: #222;
+	color: #fff;
+}
+
+.accounts-table th,
+.accounts-table td {
+	padding: 1rem;
+	text-align: left;
+	border-bottom: 1px solid #ddd;
+}
+
+.accounts-table tbody tr {
+	background-color: #fff;
+}
+
+.accounts-table tbody tr:hover {
+	background-color: #f7f7f7;
+}

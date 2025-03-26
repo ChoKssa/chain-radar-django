@@ -1,0 +1,96 @@
+/* General body styles */
+body {
+	margin: 0;
+	font-family: Arial, sans-serif;
+	background-color: #f4f4f9;
+	color: #333;
+	height: 100vh;
+	display: flex;
+	flex-direction: column;
+}
+
+/* Main content styling */
+main {
+	flex: 1;
+	padding: 2rem;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+
+/* Login header styling */
+.login-header {
+	text-align: center;
+	margin-bottom: 2rem;
+}
+
+.login-header h1 {
+	font-size: 2.5rem;
+	margin-bottom: 0.5rem;
+}
+
+.login-header p {
+	font-size: 1.2rem;
+	color: #666;
+}
+
+/* Login form styling */
+.login-form {
+	background: #fff;
+	padding: 2rem;
+	border-radius: 8px;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+	width: 100%;
+	max-width: 400px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.login-form label {
+	display: block;
+	margin-bottom: 0.5rem;
+	font-weight: bold;
+	width: 100%;
+}
+
+.login-form input {
+	width: 100%;
+	padding: 0.75rem;
+	margin-bottom: 1rem;
+	border: 1px solid #ddd;
+	border-radius: 4px;
+	font-size: 1rem;
+}
+
+/* Login button styling */
+.login-form button {
+	padding: 0.75rem 1.5rem;
+	font-size: 1rem;
+	color: #fff;
+	background-color: #ff6f61;
+	border: none;
+	border-radius: 4px;
+	cursor: pointer;
+	width: 100%;
+}
+
+.login-form button:hover {
+	background-color: #ff5743;
+}
+
+/* Signup link styling */
+.signup-link {
+	margin-top: 1rem;
+	font-size: 0.9rem;
+}
+
+.signup-link a {
+	color: #ff6f61;
+	text-decoration: none;
+}
+
+.signup-link a:hover {
+	text-decoration: underline;
+}
