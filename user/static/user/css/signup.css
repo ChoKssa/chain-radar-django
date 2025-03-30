@@ -1,14 +1,3 @@
-/* General body styles */
-body {
-	margin: 0;
-	font-family: Arial, sans-serif;
-	background-color: #f4f4f9;
-	color: #333;
-	height: 100vh;
-	display: flex;
-	flex-direction: column;
-}
-
 /* Main content styling */
 main {
 	flex: 1;
@@ -67,6 +56,12 @@ main {
 	border-radius: 4px;
 	font-size: 1rem;
 	resize: none;
+}
+
+.form-error {
+	color: red;
+	font-size: 0.9rem;
+	margin-top: 0.5rem;
 }
 
 .password-wrapper {
