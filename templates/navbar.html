@@ -11,16 +11,22 @@
 			<a href="/">ChainRadar</a>
 		</div>
 	</div>
-	<nav class="auth-buttons">
-		<a
-			href="/signup"
-			class="signup"
-			>Sign Up</a
-		>
-		<a
-			href="/login"
-			class="login"
-			>Login</a
-		>
-	</nav>
+	{% if user.is_authenticated %}
+		<div class="profile-area">
+			{% if user.profile_picture %}
+				<a href="/profile">
+					<img src="{{ user.profile_picture.url }}" alt="Profile" class="profile-picture">
+				</a>
+			{% else %}
+				<a href="/profile">
+					<img src="{% static 'images/default_user.png' %}" alt="Profile" class="profile-picture">
+				</a>
+			{% endif %}
+		</div>
+	{% else %}
+		<nav class="auth-buttons">
+			<a href="/signup" class="signup">Sign Up</a>
+			<a href="/login" class="login">Login</a>
+		</nav>
+	{% endif %}
 </header>
