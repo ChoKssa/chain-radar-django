@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}ChainRadar - News{% endblock %}
+
+{% block styles %}
+<link rel="stylesheet" href="{% static 'news/css/articles.css' %}" />
+{% endblock %}
+
+{% block content %}
+<main>
+	<!-- News section header -->
+	<div class="news-header">
+		<h1>Latest Crypto News</h1>
+		<p>Stay updated with the latest trends and insights in the cryptocurrency world.</p>
+	</div>
+	{% if user.is_authenticated and user.is_writer %}
+	<div class="create-article-button">
+		<a href="{% url 'article_create' %}" class="btn btn-primary">+ Create New Article</a>
+	</div>
+	{% endif %}
+
+	<!-- News grid layout -->
+	<div class="news-grid">
+		{% for article in articles %}
+			<div class="news-card">
+				{% if article.thumbnail %}
+					<img src="{{ article.thumbnail.url }}" alt="{{ article.title }}">
+				{% else %}
+					<img src="{% static 'images/default-news.jpg' %}" alt="Article Image">
+				{% endif %}
+
+				<div class="news-card-content">
+					<h3>{{ article.title }}</h3>
+					<p>{{ article.introduction|truncatewords:25 }}</p>
+					<a href="{% url 'article_detail' pk=article.pk %}">Read More</a>
+				</div>
+			</div>
+		{% empty %}
+		<div class="no-articles">
+			<img src="{% static 'images/no_article.png' %}" alt="No Articles">
+		</div>
+		{% endfor %}
+	</div>
+</main>
+{% endblock %}
