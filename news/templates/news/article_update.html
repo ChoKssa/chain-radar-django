@@ -1,0 +1,85 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}ChainRadar - Edit Article{% endblock %}
+
+{% block styles %}
+<link rel="stylesheet" href="{% static 'news/css/article_create.css' %}" />
+{% endblock %}
+
+{% block scripts %}
+<script src="{% static 'news/js/article_create.js' %}" defer></script>
+{% endblock %}
+
+{% block content %}
+<main>
+	<div class="news-header">
+		<h1>Edit Article</h1>
+		<p>Share your insights with the ChainRadar community.</p>
+	</div>
+
+	<form method="post" enctype="multipart/form-data" class="article-form" id="article-form">
+		{% csrf_token %}
+
+		<div class="form-group">
+			<label for="id_title">Title</label>
+			{{ form.title }}
+		</div>
+
+		<div class="form-group">
+			<label for="id_introduction">Introduction</label>
+			{{ form.introduction }}
+		</div>
+
+		<div class="form-group">
+			<label for="id_video_url">Video URL (optional)</label>
+			{{ form.video_url }}
+		</div>
+
+		<div class="form-group">
+			<label for="id_thumbnail">Thumbnail Image</label>
+			{{ form.thumbnail }}
+		</div>
+
+		<hr />
+		<h2>Paragraphs</h2>
+
+		<!-- Affichage du management_form -->
+		{{ formset.management_form }}
+
+		<div id="paragraphs-container">
+			{% for form in formset %}
+			<div class="paragraph-group">
+				{% for field in form.visible_fields %}
+					{% if field.name != 'order' and field.name != 'DELETE' %}
+						<div class="form-group">
+							<label for="{{ field.id_for_label }}">{{ field.label }}</label>
+							{{ field }}
+						</div>
+					{% endif %}
+				{% endfor %}
+				<div style="display: none;">
+					{{ form.id }}
+					{{ form.DELETE }}
+				</div>
+				<button type="button" class="remove-paragraph">Remove</button>
+			</div>
+			{% endfor %}
+		</div>
+
+		<button type="button" class="add-paragraph-button" id="add-paragraph">
+			+ Add Paragraph
+		</button>
+
+		<button type="submit">Publish updated Article</button>
+	</form>
+
+	<!-- Template JS (à cloner dynamiquement) -->
+	<div id="empty-form-template" style="display: none;">
+		<div class="paragraph-group">
+			{{ empty_form_html|safe }}
+			<button type="button" class="remove-paragraph">Remove</button>
+		</div>
+	</div>
+</main>
+{% endblock %}

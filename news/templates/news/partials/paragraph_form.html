@@ -1,0 +1,13 @@
+{% for field in form.visible_fields %}
+    {% if field.name != 'order' and field.name != 'DELETE' %}
+        <div class="form-group">
+            <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+            {{ field }}
+        </div>
+    {% endif %}
+{% endfor %}
+<div style="display: none;">
+    {{ form.id }}
+    {{ form.DELETE }}
+</div>
+<input type="hidden" name="{{ form.prefix }}-ORDER" value="__prefix__" />

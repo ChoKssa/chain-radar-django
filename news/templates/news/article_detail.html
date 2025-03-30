@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{{ article.title }} | ChainRadar{% endblock %}
+
+{% block styles %}
+<link rel="stylesheet" href="{% static 'news/css/article_detail.css' %}" />
+{% endblock %}
+
+{% block content %}
+<main>
+	<article>
+		<div class="article-header">
+			{% if user.is_authenticated %}
+  				{% if user == article.author or user.is_superuser %}
+				  <div class="article-actions">
+					<a href="{% url 'article_update' article.pk %}" class="action-button edit-button">✏️ Edit</a>
+					<form method="post" action="{% url 'article_delete' article.pk %}" style="display:inline;">
+						{% csrf_token %}
+						<button type="submit" class="action-button delete-button">🗑️ Delete</button>
+					</form>
+				</div>
+				{% endif %}
+			{% endif %}
+
+			<h1>{{ article.title }}</h1>
+			<p>Published on {{ article.created_at|date:"F j, Y" }} by {{ article.author.get_full_name|default:article.author.username }}</p>
+		</div>
+
+		{% if article.thumbnail %}
+			<img src="{{ article.thumbnail.url }}" alt="{{ article.title }}" class="article-image">
+		{% endif %}
+
+		<div class="article-content">
+			<p>{{ article.introduction }}</p>
+
+			{% for paragraph in paragraphs %}
+				{% if paragraph.title %}
+					<h2>{{ paragraph.title }}</h2>
+				{% endif %}
+				<p>{{ paragraph.content }}</p>
+			{% endfor %}
+
+			{% if article.video_url %}
+				<iframe width="100%" height="450" src="{{ article.video_url }}" frameborder="0" allowfullscreen></iframe>
+			{% endif %}
+		</div>
+	</article>
+
+	<a href="{% url 'article_list' %}" class="back-link">&larr; Back to News</a>
+</main>
+{% endblock %}
