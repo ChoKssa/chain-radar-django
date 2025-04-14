@@ -128,16 +128,7 @@ function validateCryptoForm(formData) {
 	return true;
 }
 
-const form = document.getElementById('crypto-form');
-form?.addEventListener('submit', (e) => {
-	e.preventDefault();
-
-	const formData = new FormData(form);
-
-	if (!validateCryptoForm(formData)) {
-		return;
-	}
-
+function addCrypto(form) {
 	fetch('/api/cryptos/add/', {
 		method: 'POST',
 		headers: {
@@ -164,4 +155,17 @@ form?.addEventListener('submit', (e) => {
 		const errorDiv = document.getElementById('form-error-message');
 	    errorDiv.textContent = 'An error occurred while submitting the form.';
 	});
+}
+
+const form = document.getElementById('crypto-form');
+form?.addEventListener('submit', (e) => {
+	e.preventDefault();
+
+	const formData = new FormData(form);
+
+	if (!validateCryptoForm(formData)) {
+		return;
+	}
+
+	addCrypto(formData);
 });
