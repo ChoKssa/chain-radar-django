@@ -1,0 +1,113 @@
+main {
+	flex: 1;
+	padding: 2rem;
+	max-width: 1000px;
+	margin: 0 auto;
+}
+
+.crypto-detail-header {
+	text-align: center;
+	margin-bottom: 2rem;
+}
+
+.crypto-header-flex {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 1rem;
+	margin-bottom: 1rem;
+}
+
+.crypto-logo-inline {
+	width: 48px;
+	height: 48px;
+	border-radius: 50%;
+	object-fit: contain;
+	box-shadow: 0 0 6px rgba(0, 0, 0, 0.1);
+}
+
+.crypto-name-symbol {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+
+.crypto-detail-header p {
+	font-size: 1.1rem;
+	color: #666;
+	max-width: 700px;
+	margin: 0 auto;
+}
+
+.crypto-values-grid {
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	gap: 1.5rem 2rem;
+	padding: 2rem;
+	background: white;
+	border-radius: 12px;
+	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+	width: 100%;
+	max-width: 900px;
+	margin: 0 auto 2rem;
+	justify-items: center;
+}
+
+.value-item {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	text-align: center;
+}
+
+.value-item .label {
+	font-size: 0.95rem;
+	color: #777;
+	margin-bottom: 0.3rem;
+}
+
+.value-item .value {
+	font-size: 1.4rem;
+	font-weight: bold;
+	color: #222;
+}
+
+.value-item .value.green {
+	color: #18a95b;
+}
+
+.value-item .value.red {
+	color: #e03f3f;
+}
+
+.crypto-chart {
+	width: 100%;
+	max-width: 900px;
+	margin: 0 auto 2rem;
+	background: white;
+	padding: 2rem;
+	border-radius: 12px;
+	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+@media (max-width: 600px) {
+	.crypto-values-grid {
+		grid-template-columns: 1fr;
+	}
+}
+
+.follow-btn {
+	background-color: #3498db;
+	color: white;
+	border: none;
+	padding: 8px 16px;
+	font-size: 1rem;
+	border-radius: 6px;
+	cursor: pointer;
+	transition: background-color 0.2s;
+	margin-top: 1rem;
+}
+
+.follow-btn:hover {
+	background-color: #2980b9;
+}

@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crypto_extras %}
+
+{% block title %}ChainRadar - Cryptocurrencies{% endblock %}
+
+{% block styles %}
+<link rel="stylesheet" href="{% static 'crypto/css/crypto_list.css' %}" />
+{% endblock %}
+
+{% block scripts %}
+<script src="{% static 'js/csrftoken.js' %}"></script>
+<script src="{% static 'crypto/js/crypto_list.js' %}" defer></script>
+{% endblock %}
+
+{% block content %}
+<main>
+	<div class="crypto-header">
+		<h1>Live Crypto Market</h1>
+		<p>Track real-time market prices, trends and stats.</p>
+	</div>
+	<div style="text-align: right; margin-bottom: 1rem;">
+		{% if request.user.is_staff %}
+			<button id="add-crypto-btn" class="btn">+ Add New Crypto</button>
+		{% endif %}
+	</div>
+
+	<div id="crypto-form-container" style="display:none; margin-bottom: 2rem;">
+		<form id="crypto-form" method="POST" enctype="multipart/form-data" class="crypto-form">
+			{% csrf_token %}
+			<label>Name: <input type="text" name="name" required></label><br>
+			<label>Symbol: <input type="text" name="symbol" required></label><br>
+			<label>Description: <textarea name="description" rows="3"></textarea></label><br>
+			<label>Logo: <input type="file" name="logo" accept="image/*"></label><br>
+			<div id="form-error-message" style="color: #e74c3c; margin-top: 1rem;"></div>
+			<button type="submit" class="btn">Submit</button>
+		</form>
+
+	</div>
+
+
+	<table class="crypto-table" id="crypto-table">
+		<thead>
+			<tr>
+				<th data-column="name">Name <span class="sort-indicator"></span></th>
+				<th data-column="price">Price <span class="sort-indicator"></span></th>
+				<th data-column="change">24h Change <span class="sort-indicator"></span></th>
+				<th data-column="marketcap">Market Cap <span class="sort-indicator"></span></th>
+				<th data-column="volume">24h Volume <span class="sort-indicator"></span></th>
+			</tr>
+		</thead>
+		<tbody>
+		</tbody>
+	</table>
+</main>
+{% endblock %}

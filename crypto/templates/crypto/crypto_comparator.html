@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crypto_extras %}
+
+{% block title %}ChainRadar - Crypto Comparator{% endblock %}
+
+{% block styles %}
+<link rel="stylesheet" href="{% static 'crypto/css/comparator.css' %}" />
+{% endblock %}
+
+{% block content %}
+<main>
+	<div class="container">
+		<div class="comparator-header">
+			<h1>Crypto Comparator</h1>
+			<p>Compare the key metrics of your favorite cryptocurrencies side-by-side.</p>
+		</div>
+
+		<form method="get" class="comparator-form">
+			<select name="crypto1" required>
+				<option disabled selected value="">Select Crypto 1</option>
+				{% for c in cryptos %}
+				<option value="{{ c.id }}" {% if c.id == crypto1.id %}selected{% endif %}>{{ c.name }} ({{ c.symbol }})</option>
+				{% endfor %}
+			</select>
+			<select name="crypto2" required>
+				<option disabled selected value="">Select Crypto 2</option>
+				{% for c in cryptos %}
+				<option value="{{ c.id }}" {% if c.id == crypto2.id %}selected{% endif %}>{{ c.name }} ({{ c.symbol }})</option>
+				{% endfor %}
+			</select>
+			<button type="submit">Compare</button>
+		</form>
+
+		{% if snapshot1 and snapshot2 %}
+		<table class="comparison-table">
+			<thead>
+				<tr>
+					<th>Metric</th>
+					<th>
+						{{ crypto1.name }}
+					</th>
+					<th>
+						{{ crypto2.name }}
+					</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>Price</td>
+					<td>{{ snapshot1.price|format_number }}</td>
+					<td>{{ snapshot2.price|format_number }}</td>
+				</tr>
+				<tr>
+					<td>Market Cap</td>
+					<td>{{ snapshot1.market_cap|format_number }}</td>
+					<td>{{ snapshot2.market_cap|format_number }}</td>
+				</tr>
+				<tr>
+					<td>24h Volume</td>
+					<td>{{ snapshot1.volume_24h|format_number }}</td>
+					<td>{{ snapshot2.volume_24h|format_number }}</td>
+				</tr>
+				<tr>
+					<td>Change (24h)</td>
+					<td class="{% if snapshot1.change_24h > 0 %}green{% else %}red{% endif %}">{{ snapshot1.change_24h|floatformat:2 }}%</td>
+					<td class="{% if snapshot2.change_24h > 0 %}green{% else %}red{% endif %}">{{ snapshot2.change_24h|floatformat:2 }}%</td>
+				</tr>
+			</tbody>
+		</table>
+		{% endif %}
+	</div>
+</main>
+{% endblock %}

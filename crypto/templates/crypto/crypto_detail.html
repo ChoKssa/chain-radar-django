@@ -1,0 +1,94 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crypto_extras %}
+
+{% block title %}ChainRadar - {{ crypto.name }}{% endblock %}
+
+{% block styles %}
+<link rel="stylesheet" href="{% static 'crypto/css/crypto_detail.css' %}" />
+{% endblock %}
+
+{% block scripts %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+	const ctx = document.getElementById('priceChart');
+	if (!ctx) return;
+
+	const priceChart = new Chart(ctx, {
+		type: 'line',
+		data: {
+			labels: {{ chart_dates|safe }},
+			datasets: [{
+				label: 'Price in $',
+				data: {{ chart_prices|safe }},
+				borderColor: 'rgb(75, 192, 192)',
+				tension: 0.3
+			}]
+		},
+		options: {
+			scales: {
+				y: {
+					beginAtZero: false
+				}
+			}
+		}
+	});
+});
+</script>
+{% endblock %}
+
+
+{% block content %}
+<main>
+	<div class="crypto-detail-header">
+		<div class="crypto-header-flex">
+			{% if crypto.logo %}
+				<img src="{{ crypto.logo.url }}" alt="{{ crypto.name }} Logo" class="crypto-logo-inline">
+			{% endif %}
+			<div class="crypto-name-symbol">
+				<h1>{{ crypto.name }}</h1>
+				<small>({{ crypto.symbol }})</small>
+			</div>
+
+		</div>
+		<p>{{ crypto.description }}</p>
+		{% if user.is_authenticated %}
+			<form method="post" action="{% if is_followed %}{% url 'unfollow_crypto' pk=crypto.pk %}{% else %}{% url 'follow_crypto' pk=crypto.pk %}{% endif %}">
+				{% csrf_token %}
+				<button type="submit" class="follow-btn">
+					{% if is_followed %}Unfollow{% else %}Follow{% endif %}
+				</button>
+			</form>
+		{% endif %}
+	</div>
+
+	<div class="crypto-values-grid">
+		<div class="value-item">
+			<span class="label">Price</span>
+			<span class="value">{{ price|format_number }}</span>
+		</div>
+		<div class="value-item">
+			<span class="label">24h Change</span>
+			<span class="value {% if change_24h > 0 %}green{% else %}red{% endif %}">
+				{{ change_24h|floatformat:2 }}%
+			</span>
+		</div>
+		<div class="value-item">
+			<span class="label">Market Cap</span>
+			<span class="value">{{ market_cap|format_number }}</span>
+		</div>
+		<div class="value-item">
+			<span class="label">24h Volume</span>
+			<span class="value">{{ volume_24h|format_number }}</span>
+		</div>
+	</div>
+
+
+	<div class="crypto-chart">
+		<canvas id="priceChart"></canvas>
+	</div>
+</main>
+
+{% endblock %}
