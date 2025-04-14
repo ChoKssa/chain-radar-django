@@ -55,8 +55,8 @@ class Command(BaseCommand):
                     timestamp=timestamp,
                     price=row['price'],
                     change_24h=row['change_24h'],
-                    market_cap=row['market_cap'],
-                    volume_24h=row['volume_24h'],
+                    market_cap = int(float(row['market_cap'])),
+                    volume_24h=int(float(row['volume_24h'])),
                 )
                 snapshot_count += 1
 
