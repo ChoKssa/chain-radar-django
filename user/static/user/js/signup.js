@@ -76,15 +76,6 @@ form.addEventListener('submit', (e) => {
     if (isValidForm(values)) {
         console.log('Form submitted successfully:', values);
         form.submit()
-
-        // const users = JSON.parse(localStorage.getItem('users')) || [];
-
-        // // Add new user data to local storage
-        // users.push(values);
-        // localStorage.setItem('users', JSON.stringify(users));
-
-        // alert('Form submitted successfully');
-        // displayAccounts(); // Update account list
     }
 });
 
