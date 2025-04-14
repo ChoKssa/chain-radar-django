@@ -99,7 +99,6 @@ const getCryptos = () => {
 
 getCryptos();
 
-const form = document.getElementById('crypto-form');
 
 function validateCryptoForm(formData) {
 	const name = formData.get("name")?.trim();
@@ -129,6 +128,7 @@ function validateCryptoForm(formData) {
 	return true;
 }
 
+const form = document.getElementById('crypto-form');
 form?.addEventListener('submit', (e) => {
 	e.preventDefault();
 

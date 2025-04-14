@@ -25,6 +25,7 @@
 		{% endif %}
 	</div>
 
+	{% if request.user.is_staff %}
 	<div id="crypto-form-container" style="display:none; margin-bottom: 2rem;">
 		<form id="crypto-form" method="POST" enctype="multipart/form-data" class="crypto-form">
 			{% csrf_token %}
@@ -37,7 +38,7 @@
 		</form>
 
 	</div>
-
+	{% endif %}
 
 	<table class="crypto-table" id="crypto-table">
 		<thead>
