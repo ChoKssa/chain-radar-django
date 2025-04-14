@@ -101,10 +101,42 @@ getCryptos();
 
 const form = document.getElementById('crypto-form');
 
+function validateCryptoForm(formData) {
+	const name = formData.get("name")?.trim();
+	const symbol = formData.get("symbol")?.trim();
+	const errorDiv = document.getElementById('form-error-message');
+	errorDiv.textContent = '';
+
+	if (!name || name.length < 2) {
+		errorDiv.textContent = 'Name must be at least 2 characters long.';
+		return false;
+	}
+
+	if (!symbol || symbol.length < 2 || symbol.length > 10) {
+		errorDiv.textContent = 'Symbol must be between 2 and 10 characters.';
+		return false;
+	}
+
+	const logo = formData.get("logo");
+	if (logo && logo.size > 0) {
+		const allowedTypes = ["image/png", "image/jpeg", "image/webp"];
+		if (!allowedTypes.includes(logo.type)) {
+			errorDiv.textContent = 'Logo must be a PNG, JPEG or WEBP image.';
+			return false;
+		}
+	}
+
+	return true;
+}
+
 form?.addEventListener('submit', (e) => {
 	e.preventDefault();
 
 	const formData = new FormData(form);
+
+	if (!validateCryptoForm(formData)) {
+		return;
+	}
 
 	fetch('/api/cryptos/add/', {
 		method: 'POST',
