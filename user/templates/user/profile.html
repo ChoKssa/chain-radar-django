@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}ChainRadar - Profile{% endblock %}
+
+{% block styles %}
+<link rel="stylesheet" href="{% static 'user/css/profile.css' %}" />
+{% endblock %}
+
+{% block content %}
+<main class="profile-container">
+	<div class="profile-card">
+		<div class="profile-header">
+			{% if user.profile_picture %}
+				<img src="{{ user.profile_picture.url }}" alt="Profile Picture" class="profile-picture" />
+			{% else %}
+				<img src="{% static 'images/default_user.png' %}" alt="Default Profile Picture" class="profile-picture" />
+			{% endif %}
+			<h2>{{ user.username }}</h2>
+			<p>{{ user.short_bio }}</p>
+		</div>
+
+		<div class="profile-info">
+			<p><strong>Email:</strong> {{ user.email }}</p>
+			<p><strong>Full Name:</strong> {{ user.first_name }} {{ user.last_name }}</p>
+			<p><strong>Phone:</strong> {{ user.phone_number }}</p>
+			<p><strong>Date of Birth:</strong> {{ user.date_of_birth }}</p>
+			<p><strong>Gender:</strong> {{ user.get_gender_display }}</p>
+		</div>
+		<form method="POST" action="{% url 'logout' %}">
+			{% csrf_token %}
+			<button type="submit" class="logout-btn">Logout</button>
+		</form>
+
+		<div class="followed-cryptos">
+            <h2>Followed Cryptocurrencies</h2>
+            <ul>
+                {% for crypto in followed_cryptos %}
+                <li>
+                    <form method="post" action="{% url 'unfollow_crypto' pk=crypto.crypto.pk %}">
+                        {% csrf_token %}
+                        <span>{{ crypto.crypto.name }} ({{ crypto.crypto.symbol }})</span>
+                        <button type="submit" class="unfollow-btn">Unfollow</button>
+                    </form>
+                </li>
+                {% empty %}
+                <p>You are not following any cryptocurrencies yet.</p>
+                {% endfor %}
+            </ul>
+        </div>
+
+	</div>
+</main>
+{% endblock %}
