@@ -25,6 +25,7 @@ urlpatterns = [
     path("", include("general.urls")),
     path("", include("user.urls")),
     path("", include("news.urls")),
+    path("", include("crypto.urls")),
 ]
 
 if settings.DEBUG:
