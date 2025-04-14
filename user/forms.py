@@ -22,6 +22,6 @@ class CustomUserCreationForm(UserCreationForm):
         super().__init__(*args, **kwargs)
         for field in self.fields.values():
             field.widget.attrs.update({
-                'class': 'input',  # adapte selon ta classe CSS
+                'class': 'input',
                 'placeholder': field.label,
             })
