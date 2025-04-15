@@ -1,4 +1,4 @@
-/* Main content styling */
+/* Main container layout */
 main {
 	flex: 1;
 	padding: 2rem;
@@ -6,7 +6,7 @@ main {
 	margin: 0 auto;
 }
 
-/* Article header styling */
+/* Header section of the article (title, date, author) */
 .article-header {
 	margin-bottom: 2rem;
 	text-align: center;
@@ -22,12 +22,14 @@ main {
 	color: #777;
 }
 
+/* Action buttons container (Edit, Delete) */
 .article-actions {
 	margin-top: 1.5rem;
 	display: flex;
 	gap: 1rem;
 }
 
+/* Base style for action buttons */
 .action-button {
 	display: inline-block;
 	padding: 8px 16px;
@@ -38,6 +40,7 @@ main {
 	cursor: pointer;
 }
 
+/* Edit button style */
 .edit-button {
 	background-color: #1e90ff;
 	color: white;
@@ -48,6 +51,7 @@ main {
 	background-color: #0b78d1;
 }
 
+/* Delete button style */
 .delete-button {
 	background-color: #ff6f61;
 	color: white;
@@ -58,7 +62,7 @@ main {
 	background-color: #e2594e;
 }
 
-/* Article image styling */
+/* Article thumbnail image */
 .article-image {
 	width: 100%;
 	height: auto;
@@ -67,14 +71,14 @@ main {
 	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-/* Article content styling */
+/* Content section inside the article */
 .article-content {
 	line-height: 1.8;
 	font-size: 1rem;
 	color: #555;
 }
 
-/* Article subheading styling */
+/* Subheading inside article content (e.g., paragraph titles) */
 .article-content h2 {
 	font-size: 1.8rem;
 	margin-top: 2rem;
@@ -82,11 +86,12 @@ main {
 	color: #333;
 }
 
+/* Paragraph spacing */
 .article-content p {
 	margin-bottom: 1rem;
 }
 
-/* Back link styling */
+/* Back to list link at the bottom */
 .back-link {
 	margin-top: 2rem;
 	display: inline-block;

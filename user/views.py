@@ -6,6 +6,9 @@ from .forms import CustomUserCreationForm
 from crypto.models import FollowedCrypto
 from django.urls import reverse
 
+# Handle user login view
+# Authenticate user credentials and redirect to home on success
+# Show error message if authentication fails
 def login(request):
     error_message = None
 
@@ -23,6 +26,8 @@ def login(request):
 
     return render(request, 'user/login.html', { 'error_message': error_message })
 
+# Handle user signup view
+# Process user registration form and redirect to login on success
 def signup(request):
     if request.method == 'POST':
         form = CustomUserCreationForm(request.POST, request.FILES)
@@ -34,7 +39,7 @@ def signup(request):
 
     return render(request, 'user/signup.html', {'form': form})
 
-
+# Display the user's profile page with their followed cryptocurrencies
 @login_required
 def user_profile(request):
     user = request.user
@@ -42,13 +47,14 @@ def user_profile(request):
 
     return render(request, 'user/profile.html', {'user': user, 'followed_cryptos': followed_cryptos})
 
-
+# Allow authenticated user to follow a specific cryptocurrency
 @login_required
 def follow_crypto(request, pk):
     crypto = get_object_or_404(CryptoCurrency, pk=pk)
     FollowedCrypto.objects.get_or_create(user=request.user, crypto=crypto)
     return redirect(request.META.get('HTTP_REFERER') or reverse('crypto_list'))
 
+# Allow authenticated user to unfollow a cryptocurrency (via POST request)
 @login_required
 def unfollow_crypto(request, pk):
     if request.method == 'POST':

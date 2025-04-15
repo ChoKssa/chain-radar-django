@@ -5,6 +5,7 @@ from django.template.loader import render_to_string
 from .models import Article
 from .forms import ArticleForm, ParagraphFormSet
 
+# View to create a new article with associated paragraphs
 @login_required
 def article_create(request):
     if not request.user.is_writer:
@@ -20,9 +21,9 @@ def article_create(request):
         form = ArticleForm(instance=article)
         formset = ParagraphFormSet(instance=article, prefix=prefix)
 
+    # Prepare the empty paragraph form for dynamic JS rendering
     empty_form = formset.empty_form
     empty_form.prefix = f'{prefix}-__prefix__'
-
     empty_form_html = render_to_string('news/partials/paragraph_form.html', {
         'form': empty_form,
     })
@@ -44,6 +45,7 @@ def article_create(request):
     })
 
 
+# View to update an existing article and its paragraphs
 @login_required
 def article_update(request, pk):
     article = get_object_or_404(Article, pk=pk)
@@ -76,6 +78,7 @@ def article_update(request, pk):
         form = ArticleForm(instance=article)
         formset = ParagraphFormSet(instance=article, prefix=prefix)
 
+    # Prepare the empty form for JavaScript cloning
     empty_form = ParagraphFormSet(prefix=prefix).empty_form
     empty_form.prefix = f"{prefix}-__prefix__"
     empty_form_html = render_to_string('news/partials/paragraph_form.html', {
@@ -90,6 +93,7 @@ def article_update(request, pk):
     })
 
 
+# View to delete an article
 @login_required
 def article_delete(request, pk):
     article = get_object_or_404(Article, pk=pk)
@@ -102,11 +106,13 @@ def article_delete(request, pk):
         return redirect('article_list')
 
 
+# View to list all articles
 def article_list(request):
     articles = Article.objects.all().order_by('-created_at')
     return render(request, 'news/articles.html', {'articles': articles})
 
 
+# View to display a single article with its paragraphs
 def article_detail(request, pk):
     article = get_object_or_404(Article, pk=pk)
     paragraphs = article.paragraphs.order_by('order')

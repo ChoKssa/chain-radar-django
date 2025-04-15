@@ -1,3 +1,4 @@
+/* Main content wrapper */
 main {
 	flex: 1;
 	padding: 2rem;
@@ -5,11 +6,13 @@ main {
 	margin: 0 auto;
 }
 
+/* Header section with title and description */
 .crypto-detail-header {
 	text-align: center;
 	margin-bottom: 2rem;
 }
 
+/* Flex layout for logo and name */
 .crypto-header-flex {
 	display: flex;
 	align-items: center;
@@ -18,6 +21,7 @@ main {
 	margin-bottom: 1rem;
 }
 
+/* Logo image next to name */
 .crypto-logo-inline {
 	width: 48px;
 	height: 48px;
@@ -26,12 +30,14 @@ main {
 	box-shadow: 0 0 6px rgba(0, 0, 0, 0.1);
 }
 
+/* Name and symbol alignment */
 .crypto-name-symbol {
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
 }
 
+/* Description text */
 .crypto-detail-header p {
 	font-size: 1.1rem;
 	color: #666;
@@ -39,6 +45,7 @@ main {
 	margin: 0 auto;
 }
 
+/* Grid layout for metrics (Price, Volume, etc.) */
 .crypto-values-grid {
 	display: grid;
 	grid-template-columns: repeat(2, 1fr);
@@ -53,6 +60,7 @@ main {
 	justify-items: center;
 }
 
+/* Each value block */
 .value-item {
 	display: flex;
 	flex-direction: column;
@@ -60,12 +68,14 @@ main {
 	text-align: center;
 }
 
+/* Label for the stat (e.g., "Price") */
 .value-item .label {
 	font-size: 0.95rem;
 	color: #777;
 	margin-bottom: 0.3rem;
 }
 
+/* Value formatting (size + color) */
 .value-item .value {
 	font-size: 1.4rem;
 	font-weight: bold;
@@ -73,13 +83,14 @@ main {
 }
 
 .value-item .value.green {
-	color: #18a95b;
+	color: #18a95b; /* Positive change */
 }
 
 .value-item .value.red {
-	color: #e03f3f;
+	color: #e03f3f; /* Negative change */
 }
 
+/* Chart container section */
 .crypto-chart {
 	width: 100%;
 	max-width: 900px;
@@ -90,12 +101,14 @@ main {
 	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
 }
 
+/* Responsive design: 1 column layout for mobile */
 @media (max-width: 600px) {
 	.crypto-values-grid {
 		grid-template-columns: 1fr;
 	}
 }
 
+/* Style for the follow/unfollow button */
 .follow-btn {
 	background-color: #3498db;
 	color: white;

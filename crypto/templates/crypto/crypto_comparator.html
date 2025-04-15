@@ -5,17 +5,20 @@
 {% block title %}ChainRadar - Crypto Comparator{% endblock %}
 
 {% block styles %}
+<!-- Load specific CSS for the comparator page -->
 <link rel="stylesheet" href="{% static 'crypto/css/comparator.css' %}" />
 {% endblock %}
 
 {% block content %}
 <main>
 	<div class="container">
+		<!-- Page header with title and subtitle -->
 		<div class="comparator-header">
 			<h1>Crypto Comparator</h1>
 			<p>Compare the key metrics of your favorite cryptocurrencies side-by-side.</p>
 		</div>
 
+		<!-- Form to select two cryptos to compare -->
 		<form method="get" class="comparator-form">
 			<select name="crypto1" required>
 				<option disabled selected value="">Select Crypto 1</option>
@@ -32,6 +35,7 @@
 			<button type="submit">Compare</button>
 		</form>
 
+		<!-- Display comparison table only if both snapshots are available -->
 		{% if snapshot1 and snapshot2 %}
 		<table class="comparison-table">
 			<thead>

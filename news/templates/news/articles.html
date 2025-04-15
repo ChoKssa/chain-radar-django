@@ -4,32 +4,37 @@
 {% block title %}ChainRadar - News{% endblock %}
 
 {% block styles %}
+<!-- Load specific CSS for the news article list page -->
 <link rel="stylesheet" href="{% static 'news/css/articles.css' %}" />
 {% endblock %}
 
 {% block content %}
 <main>
-	<!-- News section header -->
+	<!-- Section header with title and subtitle -->
 	<div class="news-header">
 		<h1>Latest Crypto News</h1>
 		<p>Stay updated with the latest trends and insights in the cryptocurrency world.</p>
 	</div>
+
+	<!-- Button to create a new article (visible to authenticated writers only) -->
 	{% if user.is_authenticated and user.is_writer %}
 	<div class="create-article-button">
 		<a href="{% url 'article_create' %}" class="btn btn-primary">+ Create New Article</a>
 	</div>
 	{% endif %}
 
-	<!-- News grid layout -->
+	<!-- Grid layout for listing all articles -->
 	<div class="news-grid">
 		{% for article in articles %}
 			<div class="news-card">
+				<!-- Show thumbnail or default image -->
 				{% if article.thumbnail %}
 					<img src="{{ article.thumbnail.url }}" alt="{{ article.title }}">
 				{% else %}
 					<img src="{% static 'images/default-news.jpg' %}" alt="Article Image">
 				{% endif %}
 
+				<!-- Card content: title, intro, read more link -->
 				<div class="news-card-content">
 					<h3>{{ article.title }}</h3>
 					<p>{{ article.introduction|truncatewords:25 }}</p>
@@ -37,6 +42,7 @@
 				</div>
 			</div>
 		{% empty %}
+		<!-- Fallback when there are no articles -->
 		<div class="no-articles">
 			<img src="{% static 'images/no_article.png' %}" alt="No Articles">
 		</div>

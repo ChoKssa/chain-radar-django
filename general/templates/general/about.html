@@ -3,6 +3,7 @@
 {% block title %}ChainRadar - About{% endblock %}
 
 {% block styles %}
+<!-- Load custom CSS specific to the About page -->
 <link
 	rel="stylesheet"
 	href="{% static 'general/css/about.css' %}"
@@ -11,29 +12,33 @@
 
 {% block content %}
 <main>
-    <!-- Section introducing the About page -->
+    <!-- Header section introducing the page -->
     <div class="about-header">
         <h1>About Us</h1>
         <p>Learn more about ChainRadar.</p>
     </div>
 
-    <!-- Content section describing the purpose and mission of ChainRadar -->
+    <!-- Description of platform goals and mission -->
     <div class="about-content">
-        <p>ChainRadar was founded with the goal of simplifying cryptocurrency tracking and market analysis. We aim
+        <p>
+            ChainRadar was founded with the goal of simplifying cryptocurrency tracking and market analysis. We aim
             to empower users by providing them with the tools and insights they need to make informed decisions in
-            the fast-paced world of cryptocurrencies.</p>
-        <p>Our platform provides real-time prices, market trends, and advanced comparison tools, all designed with
+            the fast-paced world of cryptocurrencies.
+        </p>
+        <p>
+            Our platform provides real-time prices, market trends, and advanced comparison tools, all designed with
             simplicity and accessibility in mind. Whether you are a seasoned investor or just getting started,
-            ChainRadar is here to help.</p>
+            ChainRadar is here to help.
+        </p>
     </div>
 
-    <!-- Section introducing the creator of ChainRadar -->
+    <!-- Creator section with contact and social links -->
     <div class="about-creator">
         <div class="creator-info">
             <h3>Alexandre Cathalifaud</h3>
             <p>Creator</p>
 
-            <!-- Social media and contact links -->
+            <!-- Contact methods -->
             <div class="social-links">
                 <a href="mailto:alexandre.cathalifaud2@mail.dcu.ie" title="Email">Mail</a>
                 <a href="https://www.linkedin.com/in/alexandre-cathalifaud/" target="_blank"

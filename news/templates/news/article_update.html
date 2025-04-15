@@ -4,23 +4,28 @@
 {% block title %}ChainRadar - Edit Article{% endblock %}
 
 {% block styles %}
+<!-- Load specific styles for article creation/editing -->
 <link rel="stylesheet" href="{% static 'news/css/article_create.css' %}" />
 {% endblock %}
 
 {% block scripts %}
+<!-- Load the JS logic for dynamic paragraph form handling -->
 <script src="{% static 'news/js/article_create.js' %}" defer></script>
 {% endblock %}
 
 {% block content %}
 <main>
+	<!-- Header for the article editing page -->
 	<div class="news-header">
 		<h1>Edit Article</h1>
 		<p>Share your insights with the ChainRadar community.</p>
 	</div>
 
+	<!-- Main form for editing the article and its paragraphs -->
 	<form method="post" enctype="multipart/form-data" class="article-form" id="article-form">
 		{% csrf_token %}
 
+		<!-- Standard article fields -->
 		<div class="form-group">
 			<label for="id_title">Title</label>
 			{{ form.title }}
@@ -44,9 +49,10 @@
 		<hr />
 		<h2>Paragraphs</h2>
 
-		<!-- Affichage du management_form -->
+		<!-- Management form for handling formset metadata -->
 		{{ formset.management_form }}
 
+		<!-- Render existing paragraph forms -->
 		<div id="paragraphs-container">
 			{% for form in formset %}
 			<div class="paragraph-group">
@@ -58,23 +64,27 @@
 						</div>
 					{% endif %}
 				{% endfor %}
+				<!-- Hidden fields for formset integrity -->
 				<div style="display: none;">
 					{{ form.id }}
 					{{ form.DELETE }}
 				</div>
+				<!-- Button to remove a paragraph section -->
 				<button type="button" class="remove-paragraph">Remove</button>
 			</div>
 			{% endfor %}
 		</div>
 
+		<!-- Button to dynamically add a new paragraph -->
 		<button type="button" class="add-paragraph-button" id="add-paragraph">
 			+ Add Paragraph
 		</button>
 
+		<!-- Final submit button to save changes -->
 		<button type="submit">Publish updated Article</button>
 	</form>
 
-	<!-- Template JS (à cloner dynamiquement) -->
+	<!-- Template for JS cloning when adding paragraphs -->
 	<div id="empty-form-template" style="display: none;">
 		<div class="paragraph-group">
 			{{ empty_form_html|safe }}

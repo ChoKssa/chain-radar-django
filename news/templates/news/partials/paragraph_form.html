@@ -1,4 +1,6 @@
+{# Loop through all visible fields in the paragraph form #}
 {% for field in form.visible_fields %}
+    {# Skip fields 'order' and 'DELETE' from visible rendering #}
     {% if field.name != 'order' and field.name != 'DELETE' %}
         <div class="form-group">
             <label for="{{ field.id_for_label }}">{{ field.label }}</label>
@@ -6,8 +8,12 @@
         </div>
     {% endif %}
 {% endfor %}
+
+{# Hidden fields: keep form instance ID and deletion flag out of view #}
 <div style="display: none;">
     {{ form.id }}
     {{ form.DELETE }}
 </div>
+
+{# JavaScript uses this to track the paragraph order in the formset #}
 <input type="hidden" name="{{ form.prefix }}-ORDER" value="__prefix__" />

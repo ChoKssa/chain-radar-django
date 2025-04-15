@@ -1,17 +1,21 @@
 {% load static %}
+
 <header>
+	<!-- Navigation bar wrapper -->
 	<div class="navbar">
-		<div
-			id="menu-button"
-			class="burger-menu"
-		>
+		<!-- Burger menu icon for mobile view -->
+		<div id="menu-button" class="burger-menu">
 			&#9776;
 		</div>
+
+		<!-- Logo linking back to the homepage -->
 		<div class="logo">
 			<a href="/">ChainRadar</a>
 		</div>
 	</div>
+
 	{% if user.is_authenticated %}
+		<!-- Profile picture display for authenticated users -->
 		<div class="profile-area">
 			{% if user.profile_picture %}
 				<a href="/profile">
@@ -24,6 +28,7 @@
 			{% endif %}
 		</div>
 	{% else %}
+		<!-- Links for unauthenticated users -->
 		<nav class="auth-buttons">
 			<a href="/signup" class="signup">Sign Up</a>
 			<a href="/login" class="login">Login</a>

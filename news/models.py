@@ -14,12 +14,15 @@ class Article(models.Model):
     )
 
     def __str__(self):
+        # Display the article's title in admin and shell
         return self.title
 
     def can_edit(self, user):
+        # Check if the given user is the author
         return self.author == user
 
 
+# Model representing a section/paragraph within an article
 class Paragraph(models.Model):
     article = models.ForeignKey(Article, on_delete=models.CASCADE, related_name='paragraphs')
     title = models.CharField(max_length=255)
@@ -30,4 +33,5 @@ class Paragraph(models.Model):
         ordering = ['order']
 
     def __str__(self):
+        # Display the paragraph's title in admin and shell
         return self.title

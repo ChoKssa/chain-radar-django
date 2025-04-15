@@ -3,6 +3,7 @@ from django.contrib.auth.admin import UserAdmin
 from .models import CustomUser
 from crypto.models import FollowedCrypto
 
+# Inline admin to manage followed cryptocurrencies directly within the user admin panel
 class FollowedCryptoInline(admin.TabularInline):
     model = FollowedCrypto
     extra = 0
@@ -10,11 +11,12 @@ class FollowedCryptoInline(admin.TabularInline):
     verbose_name = "Followed Crypto"
     verbose_name_plural = "Followed Cryptos"
 
-
+# Custom admin configuration for the CustomUser model
 class CustomUserAdmin(UserAdmin):
     model = CustomUser
     inlines = [FollowedCryptoInline]
 
+    # Columns displayed in the user list view
     list_display = (
         'username', 'email', 'first_name', 'last_name',
         'phone_number', 'date_of_birth', 'gender',
@@ -22,6 +24,7 @@ class CustomUserAdmin(UserAdmin):
         'is_staff',
     )
 
+    # Additional fields to display in the user form (read/update)
     fieldsets = UserAdmin.fieldsets + (
         ("Additional Info", {
             "fields": (
@@ -32,6 +35,7 @@ class CustomUserAdmin(UserAdmin):
         }),
     )
 
+    # Fields to display when adding a new user
     add_fieldsets = UserAdmin.add_fieldsets + (
         ("Additional Info", {
             "fields": (
@@ -42,4 +46,5 @@ class CustomUserAdmin(UserAdmin):
         }),
     )
 
+# Register the customized user model with its admin interface
 admin.site.register(CustomUser, CustomUserAdmin)

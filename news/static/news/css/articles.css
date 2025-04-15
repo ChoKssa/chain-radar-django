@@ -1,10 +1,10 @@
-/* Main content styling */
+/* Main layout container */
 main {
 	flex: 1;
 	padding: 2rem;
 }
 
-/* News page header styling */
+/* Header section for the news page */
 .news-header {
 	text-align: center;
 	margin-bottom: 2rem;
@@ -19,14 +19,14 @@ main {
 	color: #666;
 }
 
-/* News grid layout */
+/* Grid layout for news cards */
 .news-grid {
 	display: grid;
 	grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
 	gap: 2rem;
 }
 
-/* Individual news card styling */
+/* Card container for individual news articles */
 .news-card {
 	background: #fff;
 	border-radius: 8px;
@@ -37,12 +37,14 @@ main {
 	max-width: 550px;
 }
 
+/* News article thumbnail image */
 .news-card img {
 	width: 100%;
 	height: 200px;
 	object-fit: cover;
 }
 
+/* Textual content inside the card */
 .news-card-content {
 	padding: 1rem;
 }
@@ -58,7 +60,7 @@ main {
 	margin-bottom: 1rem;
 }
 
-/* News article link styling */
+/* Read More link style */
 .news-card-content a {
 	color: #ff6f61;
 	text-decoration: none;
@@ -69,6 +71,7 @@ main {
 	text-decoration: underline;
 }
 
+/* Fallback display when there are no articles */
 .no-articles {
 	text-align: center;
 	width: 100%;
@@ -83,11 +86,13 @@ main {
 	margin-bottom: 20px;
 }
 
+/* Button container for creating a new article */
 .create-article-button {
 	text-align: center;
 	margin: 30px 0;
 }
 
+/* Style for the create button */
 .create-article-button .btn {
 	background-color: #ff6f61;
 	color: white;

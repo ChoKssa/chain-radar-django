@@ -1,4 +1,4 @@
-/* Main content styling */
+/* Main page container */
 main {
 	flex: 1;
 	padding: 2rem;
@@ -8,7 +8,7 @@ main {
 	justify-content: center;
 }
 
-/* Signup header styling */
+/* Page header */
 .signup-header {
 	text-align: center;
 	margin-bottom: 2rem;
@@ -24,29 +24,27 @@ main {
 	color: #666;
 }
 
-/* Updated Signup Form Layout */
+/* Grid layout for the sign-up form */
 .signup-form {
 	display: grid;
 	grid-template-columns: 1fr 1fr;
 	gap: 1rem;
 	max-width: 600px;
 	background: #fff;
-	padding-right: 3rem;
-	padding-left: 3rem;
-	padding-top: 2rem;
-	padding-bottom: 2rem;
+	padding: 2rem 3rem;
 	border-radius: 8px;
 	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 	width: 100%;
 }
 
-/* Align labels and inputs */
+/* Labels */
 .signup-form label {
 	grid-column: span 1;
 	font-weight: bold;
 	align-self: center;
 }
 
+/* Inputs, selects, textareas */
 .signup-form input,
 .signup-form select,
 .signup-form textarea {
@@ -58,12 +56,14 @@ main {
 	resize: none;
 }
 
+/* Error message under fields */
 .form-error {
 	color: red;
 	font-size: 0.9rem;
 	margin-top: 0.5rem;
 }
 
+/* Password visibility toggle layout */
 .password-wrapper {
 	display: flex;
 	align-items: center;
@@ -80,13 +80,13 @@ main {
 	display: none;
 }
 
-/* Make some fields span two columns */
+/* Full-width fields */
 .signup-form input[type="file"],
 .signup-form textarea {
 	grid-column: span 2;
 }
 
-/* Align the submit button */
+/* Submit button layout and style */
 .signup-form button {
 	grid-column: span 2;
 	padding: 0.75rem 1.5rem;
@@ -104,6 +104,7 @@ main {
 	background-color: #ff5743;
 }
 
+/* Custom file input wrapper */
 .file-input-wrapper {
 	grid-column: span 2;
 	position: relative;
@@ -116,6 +117,7 @@ main {
 	border-radius: 5px;
 	cursor: pointer;
 }
+
 .file-input-wrapper input {
 	opacity: 0;
 	position: absolute;
@@ -123,12 +125,13 @@ main {
 	height: 100%;
 	cursor: pointer;
 }
+
 .file-input-wrapper span {
 	color: #666;
 	font-size: 1rem;
 }
 
-/* Responsive Design */
+/* Responsive adjustments for small screens */
 @media (max-width: 500px) {
 	.signup-form {
 		grid-template-columns: 1fr;
@@ -143,11 +146,7 @@ main {
 	}
 }
 
-.signup-form button:hover {
-	background-color: #ff5743;
-}
-
-/* Login link styling */
+/* Link to login below the form */
 .login-link {
 	margin-top: 1rem;
 	font-size: 0.9rem;
@@ -162,6 +161,7 @@ main {
 	text-decoration: underline;
 }
 
+/* Table of accounts (admin view or user listing) */
 .accounts-table {
 	width: 80%;
 	border-collapse: collapse;

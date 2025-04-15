@@ -4,36 +4,47 @@
 {% block title %}{{ article.title }} | ChainRadar{% endblock %}
 
 {% block styles %}
+<!-- Load custom stylesheet for article detail view -->
 <link rel="stylesheet" href="{% static 'news/css/article_detail.css' %}" />
 {% endblock %}
 
 {% block content %}
 <main>
 	<article>
+		<!-- Article Header: title, author, and action buttons -->
 		<div class="article-header">
 			{% if user.is_authenticated %}
-  				{% if user == article.author or user.is_superuser %}
-				  <div class="article-actions">
-					<a href="{% url 'article_update' article.pk %}" class="action-button edit-button">✏️ Edit</a>
-					<form method="post" action="{% url 'article_delete' article.pk %}" style="display:inline;">
-						{% csrf_token %}
-						<button type="submit" class="action-button delete-button">🗑️ Delete</button>
-					</form>
-				</div>
+				{% if user == article.author or user.is_superuser %}
+					<!-- ✏️ Edit / Delete buttons only for the author or admin -->
+					<div class="article-actions">
+						<a href="{% url 'article_update' article.pk %}" class="action-button edit-button">✏️ Edit</a>
+						<form method="post" action="{% url 'article_delete' article.pk %}" style="display:inline;">
+							{% csrf_token %}
+							<button type="submit" class="action-button delete-button">🗑️ Delete</button>
+						</form>
+					</div>
 				{% endif %}
 			{% endif %}
 
+			<!-- Article Title and Author -->
 			<h1>{{ article.title }}</h1>
-			<p>Published on {{ article.created_at|date:"F j, Y" }} by {{ article.author.get_full_name|default:article.author.username }}</p>
+			<p>
+				Published on {{ article.created_at|date:"F j, Y" }}
+				by {{ article.author.get_full_name|default:article.author.username }}
+			</p>
 		</div>
 
+		<!-- Thumbnail image if available -->
 		{% if article.thumbnail %}
 			<img src="{{ article.thumbnail.url }}" alt="{{ article.title }}" class="article-image">
 		{% endif %}
 
+		<!-- Article content: intro + paragraphs -->
 		<div class="article-content">
+			<!-- Article intro paragraph -->
 			<p>{{ article.introduction }}</p>
 
+			<!-- Dynamic paragraphs with optional section titles -->
 			{% for paragraph in paragraphs %}
 				{% if paragraph.title %}
 					<h2>{{ paragraph.title }}</h2>
@@ -41,12 +52,14 @@
 				<p>{{ paragraph.content }}</p>
 			{% endfor %}
 
+			<!-- Embedded video if provided -->
 			{% if article.video_url %}
 				<iframe width="100%" height="450" src="{{ article.video_url }}" frameborder="0" allowfullscreen></iframe>
 			{% endif %}
 		</div>
 	</article>
 
+	<!-- Back link to return to article list -->
 	<a href="{% url 'article_list' %}" class="back-link">&larr; Back to News</a>
 </main>
 {% endblock %}

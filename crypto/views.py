@@ -5,13 +5,16 @@ from django.contrib.auth.decorators import user_passes_test
 from django.shortcuts import redirect
 from django.http import JsonResponse
 
+# View to render the crypto list page
 def crypto_list(request):
     return render(request, 'crypto/crypto_list.html')
 
-
+# JSON endpoint that returns the latest snapshot data for all cryptos
 def crypto_list_json(request):
+    # Prepare a subquery to get the latest snapshot per cryptocurrency
     latest_snapshot = CryptoSnapshot.objects.filter(crypto=OuterRef('pk')).order_by('-timestamp')
 
+    # Annotate each cryptocurrency with its latest snapshot values
     cryptos = CryptoCurrency.objects.annotate(
         latest_price=Subquery(latest_snapshot.values('price')[:1]),
         latest_change=Subquery(latest_snapshot.values('change_24h')[:1]),
@@ -20,6 +23,7 @@ def crypto_list_json(request):
         latest_snapshot_id=Subquery(latest_snapshot.values('id')[:1]),
     )
 
+    # Serialize the annotated data to JSON
     data = [
         {
             "id": c.pk,
@@ -36,7 +40,7 @@ def crypto_list_json(request):
 
     return JsonResponse({"cryptos": data})
 
-
+# View restricted to staff users to add a new cryptocurrency via POST
 @user_passes_test(lambda u: u.is_staff)
 def add_crypto(request):
     if request.method == 'POST':
@@ -45,12 +49,14 @@ def add_crypto(request):
         description = request.POST.get('description')
         logo = request.FILES.get('logo')
 
+        # Validate required fields
         if not name.strip() or not symbol.strip():
             return JsonResponse({
                 'success': False,
                 'error': 'Name and symbol are required.'
             })
 
+        # Create the new cryptocurrency entry
         crypto = CryptoCurrency.objects.create(
             name=name,
             symbol=symbol.upper(),
@@ -58,6 +64,7 @@ def add_crypto(request):
             logo=logo
         )
 
+        # Return JSON response if it's an AJAX request
         if request.headers.get('x-requested-with') == 'XMLHttpRequest':
             return JsonResponse({
                 'success': True,
@@ -67,17 +74,18 @@ def add_crypto(request):
         return redirect('crypto_list')
     return redirect('crypto_list')
 
-
-
+# View showing detailed data and chart for a single crypto
 def crypto_detail(request, pk):
     crypto = get_object_or_404(CryptoCurrency, pk=pk)
     snapshots = CryptoSnapshot.objects.filter(crypto=crypto).order_by('timestamp')
 
+    # Prepare data for chart rendering
     chart_dates = [snap.timestamp.strftime('%Y-%m-%d') for snap in snapshots]
     chart_prices = [float(snap.price) for snap in snapshots]
 
     latest_snapshot = snapshots.last()
 
+    # Check if the current user follows this crypto
     is_followed = False
     if request.user.is_authenticated:
         is_followed = FollowedCrypto.objects.filter(user=request.user, crypto=crypto).exists()
@@ -93,7 +101,7 @@ def crypto_detail(request, pk):
         'is_followed': is_followed,
     })
 
-
+# View to compare two cryptocurrencies side-by-side
 def crypto_comparator(request):
     cryptos = CryptoCurrency.objects.all()
 
@@ -111,6 +119,7 @@ def crypto_comparator(request):
 
                 print(f"Selected cryptocurrencies: {crypto1.name} and {crypto2.name}")
 
+                # Get latest snapshots for each crypto
                 latest_id_1 = CryptoSnapshot.objects.filter(crypto=crypto1).aggregate(Max('id'))['id__max']
                 latest_id_2 = CryptoSnapshot.objects.filter(crypto=crypto2).aggregate(Max('id'))['id__max']
 

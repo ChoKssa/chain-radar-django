@@ -1,6 +1,7 @@
 {% extends 'base.html' %} {% load static %}
 
 {% block styles %}
+<!-- Load custom stylesheet for homepage layout and visuals -->
 <link
 	rel="stylesheet"
 	href="{% static 'general/css/index.css' %}"
@@ -9,7 +10,7 @@
 
 {% block content %}
 <main>
-	<!-- Presentation section with a brief introduction -->
+	<!-- Hero Section: Brief introduction of the web app's purpose -->
 	<section class="presentation">
 		<h1>Stay Ahead in the Crypto World</h1>
 		<p>
@@ -18,8 +19,9 @@
 		</p>
 	</section>
 
-	<!-- Features section highlighting key functionalities -->
+	<!-- Feature Highlights: Show 3 main features of the platform -->
 	<section class="features">
+		<!-- Feature 1: Real-time price tracking -->
 		<div class="feature">
 			<img
 				src="{% static 'images/icons/price.png' %}"
@@ -28,6 +30,8 @@
 			<h3>Live Price Tracker</h3>
 			<p>Get real-time updates on cryptocurrency prices.</p>
 		</div>
+
+		<!-- Feature 2: Latest market news -->
 		<div class="feature">
 			<img
 				src="{% static 'images/icons/article.png' %}"
@@ -36,6 +40,8 @@
 			<h3>Market News</h3>
 			<p>Stay informed with the latest news and trends.</p>
 		</div>
+
+		<!-- Feature 3: Comparator tool -->
 		<div class="feature">
 			<img
 				src="{% static 'images/icons/comparator.png' %}"
@@ -49,7 +55,7 @@
 		</div>
 	</section>
 
-	<!-- Call-to-action (CTA) section encouraging user sign-ups -->
+	<!-- Call-To-Action: Encourage users to register -->
 	<section class="cta">
 		<h2>Join the Crypto Revolution</h2>
 		<p>Sign up today and start tracking your favorite cryptocurrencies.</p>

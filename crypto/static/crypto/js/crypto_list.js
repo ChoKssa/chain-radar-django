@@ -1,9 +1,12 @@
+// Get CSRF token from cookie for secure POST requests
 const csrftoken = getCookie('csrftoken');
+
+// Get the crypto table and header cells
 const table = document.getElementById("crypto-table");
 const headers = table.querySelectorAll("thead th");
 let sortDirection = {};
 
-
+// Add sorting behavior to table headers
 headers.forEach((header, index) => {
     header.style.cursor = "pointer";
 
@@ -11,13 +14,16 @@ headers.forEach((header, index) => {
         const columnKey = header.getAttribute("data-column");
         const rows = Array.from(table.querySelectorAll("tbody tr"));
 
+        // Toggle sort direction for clicked column
         const dir = sortDirection[index] === "asc" ? "desc" : "asc";
         sortDirection = {};
         sortDirection[index] = dir;
 
+        // Reset sort indicators
         headers.forEach(h => h.classList.remove("sorted-asc", "sorted-desc"));
         header.classList.add(dir === "asc" ? "sorted-asc" : "sorted-desc");
 
+        // Sort rows by selected column
         rows.sort((a, b) => {
             let aVal, bVal;
 
@@ -34,11 +40,13 @@ headers.forEach((header, index) => {
             }
         });
 
+        // Re-attach sorted rows
         const tbody = table.querySelector("tbody");
         rows.forEach(row => tbody.appendChild(row));
     });
 });
 
+// Toggle visibility of the crypto creation form
 const toggleBtn = document.getElementById('add-crypto-btn');
 const formContainer = document.getElementById('crypto-form-container');
 
@@ -48,8 +56,7 @@ if (toggleBtn && formContainer) {
     });
 }
 
-
-
+// Format numbers into currency with suffixes
 function formatNumber(n) {
 	if (n === null || n === undefined) return '-';
 	if (n >= 1e9) return '$' + (n / 1e9).toFixed(2) + 'B';
@@ -58,6 +65,7 @@ function formatNumber(n) {
 	return '$' + parseFloat(n).toFixed(2);
 }
 
+// Fetch crypto data from the API and update the table
 function getCryptos() {
 	const tableBody = $('#crypto-table tbody');
 	tableBody.html('<tr><td colspan="5" style="text-align:center;">Loading...</td></tr>');
@@ -74,6 +82,7 @@ function getCryptos() {
 				return;
 			}
 
+			// Build each row from the data
 			data.cryptos.forEach(c => {
 				const row = `
 					<tr style="cursor:pointer;" onclick="window.location.href='/cryptos/${c.id}/'">
@@ -96,7 +105,7 @@ function getCryptos() {
 	});
 }
 
-
+// Validate form input before submission
 function validateCryptoForm(formData) {
 	const name = formData.get("name")?.trim();
 	const symbol = formData.get("symbol")?.trim();
@@ -125,6 +134,7 @@ function validateCryptoForm(formData) {
 	return true;
 }
 
+// Submit the form via AJAX to add a new crypto
 function addCrypto(formData) {
 	$.ajax({
 		url: '/api/cryptos/add/',
@@ -150,6 +160,7 @@ function addCrypto(formData) {
 	});
 }
 
+// On page load: fetch data and set up form submission
 $(document).ready(() => {
 	getCryptos();
 

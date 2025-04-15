@@ -1,4 +1,4 @@
-/* Main content styling */
+/* Main container styling for the login page */
 main {
 	flex: 1;
 	padding: 2rem;
@@ -8,7 +8,7 @@ main {
 	justify-content: center;
 }
 
-/* Login header styling */
+/* Header section with title and subtitle */
 .login-header {
 	text-align: center;
 	margin-bottom: 2rem;
@@ -24,7 +24,7 @@ main {
 	color: #666;
 }
 
-/* Login form styling */
+/* Login form container */
 .login-form {
 	background: #fff;
 	padding: 2rem;
@@ -37,6 +37,7 @@ main {
 	align-items: center;
 }
 
+/* Labels inside the form */
 .login-form label {
 	display: block;
 	margin-bottom: 0.5rem;
@@ -44,6 +45,7 @@ main {
 	width: 100%;
 }
 
+/* Input fields (username, password) */
 .login-form input {
 	width: 100%;
 	padding: 0.75rem;
@@ -53,7 +55,7 @@ main {
 	font-size: 1rem;
 }
 
-/* Login button styling */
+/* Submit button style */
 .login-form button {
 	padding: 0.75rem 1.5rem;
 	font-size: 1rem;
@@ -65,17 +67,19 @@ main {
 	width: 100%;
 }
 
+/* Submit button hover effect */
 .login-form button:hover {
 	background-color: #ff5743;
 }
 
+/* Error message styling */
 .error {
 	color: red;
 	font-size: 0.9rem;
 	margin-top: 0.5rem;
 }
 
-/* Signup link styling */
+/* Link below the form to redirect to signup */
 .signup-link {
 	margin-top: 1rem;
 	font-size: 0.9rem;

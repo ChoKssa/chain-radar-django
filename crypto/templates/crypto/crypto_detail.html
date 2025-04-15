@@ -5,10 +5,12 @@
 {% block title %}ChainRadar - {{ crypto.name }}{% endblock %}
 
 {% block styles %}
+<!-- Load specific CSS for crypto detail page -->
 <link rel="stylesheet" href="{% static 'crypto/css/crypto_detail.css' %}" />
 {% endblock %}
 
 {% block scripts %}
+<!-- Load Chart.js for rendering the price chart -->
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <script>
@@ -16,13 +18,14 @@ document.addEventListener("DOMContentLoaded", function () {
 	const ctx = document.getElementById('priceChart');
 	if (!ctx) return;
 
+	// Initialize the line chart for historical price data
 	const priceChart = new Chart(ctx, {
 		type: 'line',
 		data: {
-			labels: {{ chart_dates|safe }},
+			labels: {{ chart_dates|safe }},  // Dates for the x-axis
 			datasets: [{
 				label: 'Price in $',
-				data: {{ chart_prices|safe }},
+				data: {{ chart_prices|safe }},  // Price values
 				borderColor: 'rgb(75, 192, 192)',
 				tension: 0.3
 			}]
@@ -42,6 +45,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 {% block content %}
 <main>
+	<!-- Header section with crypto name, symbol, and logo -->
 	<div class="crypto-detail-header">
 		<div class="crypto-header-flex">
 			{% if crypto.logo %}
@@ -51,9 +55,10 @@ document.addEventListener("DOMContentLoaded", function () {
 				<h1>{{ crypto.name }}</h1>
 				<small>({{ crypto.symbol }})</small>
 			</div>
-
 		</div>
 		<p>{{ crypto.description }}</p>
+
+		<!-- Follow/unfollow button only for authenticated users -->
 		{% if user.is_authenticated %}
 			<form method="post" action="{% if is_followed %}{% url 'unfollow_crypto' pk=crypto.pk %}{% else %}{% url 'follow_crypto' pk=crypto.pk %}{% endif %}">
 				{% csrf_token %}
@@ -64,6 +69,7 @@ document.addEventListener("DOMContentLoaded", function () {
 		{% endif %}
 	</div>
 
+	<!-- Grid displaying crypto stats -->
 	<div class="crypto-values-grid">
 		<div class="value-item">
 			<span class="label">Price</span>
@@ -85,7 +91,7 @@ document.addEventListener("DOMContentLoaded", function () {
 		</div>
 	</div>
 
-
+	<!-- Chart canvas for displaying historical price data -->
 	<div class="crypto-chart">
 		<canvas id="priceChart"></canvas>
 	</div>

@@ -3,6 +3,7 @@
 {% block title %}ChainRadar - Login{% endblock %}
 
 {% block styles %}
+<!-- Load login-specific stylesheet -->
 <link
 	rel="stylesheet"
 	href="{% static 'user/css/login.css' %}"
@@ -14,7 +15,7 @@
 
 {% block content %}
 <main>
-    <!-- Login header section with a welcome message -->
+    <!-- Page header with welcome message -->
     <div class="login-header">
         <h1>Welcome Back</h1>
         <p>Log in to access your account and track your favorite cryptocurrencies.</p>
@@ -23,7 +24,8 @@
     <!-- Login form section -->
     <form class="login-form" id="login-form" method="post">
         {% csrf_token %}
-        <!-- Email input field -->
+
+        <!-- Username input field -->
         <label for="username">Username</label>
         <input type="username" id="username" name="username" placeholder="Enter your username" required>
 
@@ -31,17 +33,18 @@
         <label for="password">Password</label>
         <input type="password" id="password" name="password" placeholder="Enter your password" required>
 
-        <!-- Login button -->
+        <!-- Submit button to log in -->
         <button type="submit">Log In</button>
+
+        <!-- Error message display if login fails -->
         {% if error_message %}
             <p class="error">{{ error_message }}</p>
         {% endif %}
     </form>
 
-    <!-- Link to sign-up page for users who don't have an account -->
+    <!-- Sign-up redirection link for new users -->
     <div class="signup-link">
         Don't have an account? <a href="/signup">Sign Up</a>
     </div>
-
 </main>
 {% endblock %}

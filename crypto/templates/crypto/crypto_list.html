@@ -5,10 +5,12 @@
 {% block title %}ChainRadar - Cryptocurrencies{% endblock %}
 
 {% block styles %}
+<!-- Load page-specific CSS -->
 <link rel="stylesheet" href="{% static 'crypto/css/crypto_list.css' %}" />
 {% endblock %}
 
 {% block scripts %}
+<!-- Load required JS libraries and page script -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="{% static 'js/csrftoken.js' %}"></script>
 <script src="{% static 'crypto/js/crypto_list.js' %}" defer></script>
@@ -16,16 +18,20 @@
 
 {% block content %}
 <main>
+	<!-- Page header -->
 	<div class="crypto-header">
 		<h1>Live Crypto Market</h1>
 		<p>Track real-time market prices, trends and stats.</p>
 	</div>
+
+	<!-- Show add button only for staff users -->
 	<div style="text-align: right; margin-bottom: 1rem;">
 		{% if request.user.is_staff %}
 			<button id="add-crypto-btn" class="btn">+ Add New Crypto</button>
 		{% endif %}
 	</div>
 
+	<!-- Staff-only: Form to add a new cryptocurrency -->
 	{% if request.user.is_staff %}
 	<div id="crypto-form-container" style="display:none; margin-bottom: 2rem;">
 		<form id="crypto-form" method="POST" enctype="multipart/form-data" class="crypto-form">
@@ -37,10 +43,10 @@
 			<div id="form-error-message" style="color: #e74c3c; margin-top: 1rem;"></div>
 			<button type="submit" class="btn">Submit</button>
 		</form>
-
 	</div>
 	{% endif %}
 
+	<!-- Table that will be dynamically filled with crypto data -->
 	<table class="crypto-table" id="crypto-table">
 		<thead>
 			<tr>
@@ -52,6 +58,7 @@
 			</tr>
 		</thead>
 		<tbody>
+			<!-- Dynamic rows will be inserted here via JS -->
 		</tbody>
 	</table>
 </main>

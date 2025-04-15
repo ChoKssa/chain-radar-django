@@ -3,6 +3,7 @@
 {% block title %}ChainRadar - Create Article{% endblock %}
 
 {% block styles %}
+<!-- Load the article creation page stylesheet -->
 <link
 	rel="stylesheet"
 	href="{% static 'news/css/article_create.css' %}"
@@ -10,16 +11,19 @@
 {% endblock %}
 
 {% block scripts %}
+<!-- Load the JavaScript for dynamic paragraph management -->
 <script src="{% static 'news/js/article_create.js' %}" defer></script>
 {% endblock %}
 
 {% block content %}
 <main>
+	<!-- Header for the article creation page -->
 	<div class="news-header">
 		<h1>Create New Article</h1>
 		<p>Share your insights with the ChainRadar community.</p>
 	</div>
 
+	<!-- Main form to create a new article and add paragraphs -->
 	<form
 		method="post"
 		enctype="multipart/form-data"
@@ -28,6 +32,7 @@
 	>
 		{% csrf_token %}
 
+		<!-- Basic article fields -->
 		<div class="form-group">
 			<label for="id_title">Title</label>
 			{{ form.title }}
@@ -50,8 +55,11 @@
 
 		<hr />
 		<h2>Paragraphs</h2>
+
+		<!-- Management form to handle the paragraph formset -->
 		{{ formset.management_form }}
 
+		<!-- Container for each paragraph block -->
 		<div id="paragraphs-container">
 			{% for form in formset %}
 			<div class="paragraph-group">
@@ -64,14 +72,18 @@
 					{% endif %}
 				{% endfor %}
 
+				<!-- Hidden DELETE checkbox for formset logic -->
 				<div style="display: none;">
 					{{ form.DELETE }}
 				</div>
+
+				<!-- Button to remove a paragraph section -->
 				<button type="button" class="remove-paragraph">Remove</button>
 			</div>
 			{% endfor %}
 		</div>
 
+		<!-- Button to dynamically add a new paragraph -->
 		<button
 			type="button"
 			class="add-paragraph-button"
@@ -79,9 +91,12 @@
 		>
 			+ Add Paragraph
 		</button>
+
+		<!-- Final submit button to publish the article -->
 		<button type="submit">Publish Article</button>
 	</form>
 
+	<!-- Hidden paragraph form template for JavaScript cloning -->
 	<div id="empty-form-template" style="display: none;">
 		<div class="paragraph-group">
 			{{ empty_form_html|safe }}

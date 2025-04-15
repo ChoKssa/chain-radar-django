@@ -1,3 +1,4 @@
+/* Container styles */
 main {
 	flex: 1;
 	padding: 2rem;
@@ -5,6 +6,7 @@ main {
 	margin: 0 auto;
 }
 
+/* Page header styles */
 .crypto-header {
 	text-align: center;
 	margin-bottom: 2rem;
@@ -20,6 +22,7 @@ main {
 	color: #666;
 }
 
+/* Styles for the form used to add new cryptocurrencies */
 .crypto-form {
 	background: white;
 	padding: 2rem;
@@ -43,7 +46,6 @@ main {
 	font-size: 1rem;
 	border: 1px solid #ccc;
 	border-radius: 6px;
-	box-sizing: border-box;
 	transition: border 0.2s ease;
 }
 
@@ -53,26 +55,8 @@ main {
 	outline: none;
 }
 
-.crypto-form button[type="submit"] {
-	background-color: #ff6f61;
-	color: white;
-	font-size: 1rem;
-	font-weight: bold;
-	padding: 0.8rem 1.5rem;
-	border: none;
-	border-radius: 6px;
-	cursor: pointer;
-	transition: background 0.3s ease;
-}
-
-.crypto-form button[type="submit"]:hover {
-	background-color: #ff5743;
-}
-
-#add-crypto-btn {
-	margin-bottom: 1rem;
-}
-
+/* Submit button styles */
+.crypto-form button[type="submit"],
 .btn {
 	background-color: #ff6f61;
 	color: white;
@@ -84,10 +68,12 @@ main {
 	transition: background 0.3s;
 }
 
+.crypto-form button[type="submit"]:hover,
 .btn:hover {
 	background-color: #ff5743;
 }
 
+/* Table styles */
 .crypto-table {
 	width: 100%;
 	border-collapse: collapse;
@@ -110,12 +96,7 @@ main {
 	font-size: 1rem;
 }
 
-.crypto-table thead th {
-	position: relative;
-	cursor: pointer;
-	user-select: none;
-}
-
+/* Header sorting indicators */
 .sort-indicator {
 	margin-left: 6px;
 	font-size: 0.8rem;
@@ -130,18 +111,14 @@ th.sorted-desc .sort-indicator::after {
 	content: "▼";
 }
 
-.crypto-table tbody tr {
-	transition: background 0.2s ease;
-	cursor: pointer;
-}
-
+/* Row hover effect */
 .crypto-table tbody tr:hover {
 	background-color: #f9f9f9;
 }
 
+/* Crypto name cell with image and symbol */
 .crypto-table td:first-child {
 	text-align: left;
-	padding-left: 1.5rem;
 	display: flex;
 	align-items: center;
 	gap: 10px;
@@ -155,16 +132,7 @@ th.sorted-desc .sort-indicator::after {
 	box-shadow: 0 0 4px rgba(0, 0, 0, 0.1);
 }
 
-.crypto-name {
-	font-weight: 500;
-}
-
-.crypto-name small {
-	color: #888;
-	font-size: 0.9rem;
-	margin-left: 4px;
-}
-
+/* Positive/negative change colors */
 .green {
 	color: #2ecc71;
 	font-weight: bold;
@@ -175,12 +143,14 @@ th.sorted-desc .sort-indicator::after {
 	font-weight: bold;
 }
 
+/* Message styling for empty or loading states */
 .crypto-table td[colspan="5"] {
 	padding: 2rem;
 	text-align: center;
 	color: #999;
 }
 
+/* Responsive adjustments for small screens */
 @media (max-width: 768px) {
 	.crypto-table th,
 	.crypto-table td {

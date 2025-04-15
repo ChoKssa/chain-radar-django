@@ -3,62 +3,68 @@
 {% block title %}ChainRadar - Sign Up{% endblock %}
 
 {% block styles %}
-<link
-	rel="stylesheet"
-	href="{% static 'user/css/signup.css' %}"
-/>
+<!-- Load the CSS specific to the sign-up page -->
+<link rel="stylesheet" href="{% static 'user/css/signup.css' %}" />
 {% endblock %}
 
 {% block scripts %}
+<!-- Load JS for password visibility toggling -->
 <script src="{% static 'user/js/signup.js' %}" defer></script>
 {% endblock %}
 
 {% block content %}
 <main>
+	<!-- Page header with introductory text -->
 	<div class="signup-header">
 		<h1>Create Your Account</h1>
 		<p>Join ChainRadar to start tracking your favorite cryptocurrencies.</p>
 	</div>
 
+	<!-- Registration form with multipart enctype for image upload -->
 	<form class="signup-form" id="signup-form" method="post" enctype="multipart/form-data">
 		{% csrf_token %}
+
+		<!-- Username field -->
 		<label for="username">Username</label>
 		<input type="text" id="username" name="username" placeholder="Enter your username" required>
 
+		<!-- First name -->
 		<label for="first_name">First Name</label>
 		<input type="text" id="first_name" name="first_name" placeholder="Enter your name" required>
 
+		<!-- Last name -->
 		<label for="last_name">Last Name</label>
 		<input type="text" id="last_name" name="last_name" placeholder="Enter your last name" required>
 
+		<!-- Email -->
 		<label for="email">Email</label>
 		<input type="email" id="email" name="email" placeholder="Enter your email" required>
 
+		<!-- Password field with toggle visibility icons -->
 		<label for="password1">Password</label>
 		<div class="password-wrapper">
 			<input type="password" id="password1" name="password1" placeholder="Enter your password" required>
-			<img src="{% static 'images/icons/eye.png' %}" alt="Show Password" id="show-password" class="show-password hidden"
-				width="20" height="20">
-			<img src="{% static 'images/icons/eye-closed.png' %}" alt="Show Password" id="hide-password" class="hide-password"
-				width="20" height="20">
+			<img src="{% static 'images/icons/eye.png' %}" alt="Show Password" id="show-password" class="show-password hidden" width="20" height="20">
+			<img src="{% static 'images/icons/eye-closed.png' %}" alt="Hide Password" id="hide-password" class="hide-password" width="20" height="20">
 		</div>
 
+		<!-- Confirm password with toggle visibility -->
 		<label for="password2">Confirm Password</label>
 		<div class="password-wrapper">
-			<input type="password" id="password2" name="password2" placeholder="Confirm your password"
-				required>
-			<img src="{% static 'images/icons/eye.png' %}" alt="Show Password" id="show-confirm-password"
-				class="show-password hidden" width="20" height="20">
-			<img src="{% static 'images/icons/eye-closed.png' %}" alt="Show Password" id="hide-confirm-password"
-				class="hide-password" width="20" height="20">
+			<input type="password" id="password2" name="password2" placeholder="Confirm your password" required>
+			<img src="{% static 'images/icons/eye.png' %}" alt="Show Password" id="show-confirm-password" class="show-password hidden" width="20" height="20">
+			<img src="{% static 'images/icons/eye-closed.png' %}" alt="Hide Password" id="hide-confirm-password" class="hide-password" width="20" height="20">
 		</div>
 
+		<!-- Phone number -->
 		<label for="phone_number">Phone Number</label>
 		<input type="tel" id="phone_number" name="phone_number" placeholder="Enter your phone number">
 
+		<!-- Date of birth -->
 		<label for="date_of_birth">Date of Birth</label>
 		<input type="date" id="date_of_birth" name="date_of_birth" required>
 
+		<!-- Gender selection -->
 		<label for="gender">Gender</label>
 		<select id="gender" name="gender">
 			<option value="male">Male</option>
@@ -66,16 +72,21 @@
 			<option value="other">Other</option>
 		</select>
 
+		<!-- Profile picture upload -->
 		<label for="profile_picture">Profile Picture</label>
 		<div class="file-input-wrapper">
 			<input type="file" id="profile_picture" name="profile_picture" accept="image/png, image/jpeg, image/jpg">
 			<span>Choose a profile picture</span>
 		</div>
 
+		<!-- Short bio textarea -->
 		<label for="short_bio">Short Bio</label>
 		<textarea id="short_bio" name="short_bio" rows="3" placeholder="Tell us about yourself"></textarea>
 
+		<!-- Submit button -->
 		<button type="submit">Sign Up</button>
+
+		<!-- Error messages (field-specific and non-field) -->
 		{% if form.errors %}
 		<div class="form-errors">
 			{% for field in form %}
@@ -90,6 +101,7 @@
 		{% endif %}
 	</form>
 
+	<!-- Link to login page -->
 	<div class="login-link">
 		Already have an account? <a href="/login">Log in</a>
 	</div>

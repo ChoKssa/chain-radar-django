@@ -1,8 +1,10 @@
+/* Main content wrapper */
 main {
 	flex: 1;
 	padding: 2rem;
 }
 
+/* Header section at the top of the page */
 .news-header {
 	text-align: center;
 	margin-bottom: 2rem;
@@ -12,6 +14,7 @@ main {
 	font-size: 2.5rem;
 }
 
+/* Article form container */
 .article-form {
 	max-width: 800px;
 	margin: 0 auto;
@@ -21,6 +24,7 @@ main {
 	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
+/* Each form group inside the article form */
 .article-form .form-group {
 	margin-bottom: 1.5rem;
 }
@@ -31,6 +35,7 @@ main {
 	margin-bottom: 0.5rem;
 }
 
+/* Input and textarea elements styling */
 .article-form input,
 .article-form textarea {
 	width: 100%;
@@ -39,6 +44,7 @@ main {
 	border-radius: 6px;
 }
 
+/* Wrapper for each paragraph section */
 .paragraph-group {
 	border: 1px solid #eee;
 	padding: 1rem;
@@ -48,6 +54,7 @@ main {
 	position: relative;
 }
 
+/* Ensure consistent sizing */
 .paragraph-group * {
 	box-sizing: border-box;
 }
@@ -62,6 +69,7 @@ main {
 	box-sizing: border-box;
 }
 
+/* Button to remove a paragraph section */
 .remove-paragraph {
 	position: absolute;
 	top: 10px;
@@ -75,6 +83,7 @@ main {
 	font-size: 0.8rem;
 }
 
+/* Button to dynamically add a paragraph */
 .add-paragraph-button {
 	display: block;
 	margin: 2rem auto;
@@ -87,6 +96,7 @@ main {
 	cursor: pointer;
 }
 
+/* Submit button for the article form */
 .article-form button[type="submit"] {
 	background-color: #ff6f61;
 	color: white;

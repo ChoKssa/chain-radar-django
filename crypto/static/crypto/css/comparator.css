@@ -1,3 +1,4 @@
+/* Wrapper for the page content */
 main {
 	flex: 1;
 	padding: 2rem;
@@ -5,6 +6,7 @@ main {
 	margin: 0 auto;
 }
 
+/* Main centered container for comparator card */
 .container {
 	display: flex;
 	flex-direction: column;
@@ -16,6 +18,7 @@ main {
 	padding: 2rem;
 }
 
+/* Header title + subtitle */
 .comparator-header {
 	text-align: center;
 	margin-bottom: 2rem;
@@ -31,6 +34,7 @@ main {
 	font-size: 1.1rem;
 }
 
+/* Flex form for selecting two cryptos */
 .comparator-form {
 	display: flex;
 	justify-content: center;
@@ -39,6 +43,7 @@ main {
 	margin-bottom: 2rem;
 }
 
+/* Dropdowns and button in form */
 .comparator-form select,
 .comparator-form button {
 	padding: 0.5rem 1rem;
@@ -49,6 +54,7 @@ main {
 	cursor: pointer;
 }
 
+/* Style for submit button */
 .comparator-form button {
 	background-color: #007bff;
 	color: #fff;
@@ -60,31 +66,37 @@ main {
 	background-color: #0056b3;
 }
 
+/* Table to compare two cryptocurrencies */
 .comparison-table {
 	width: 100%;
 	border-collapse: collapse;
 	text-align: center;
 }
 
+/* Table cell styles */
 .comparison-table th,
 .comparison-table td {
 	padding: 1rem;
 	border: 1px solid #eee;
 }
 
+/* Header row styling */
 .comparison-table thead {
 	background-color: #333;
 	color: white;
 }
 
+/* Alternate row coloring */
 .comparison-table tbody tr:nth-child(even) {
 	background-color: #f9f9f9;
 }
 
+/* Font size adjustment */
 .comparison-table td {
 	font-size: 1.05rem;
 }
 
+/* Positive/negative percentage color coding */
 .green {
 	color: #2ecc71;
 	font-weight: bold;
@@ -95,6 +107,7 @@ main {
 	font-weight: bold;
 }
 
+/* Responsive styling */
 @media (max-width: 768px) {
 	.comparator-form {
 		flex-direction: column;
