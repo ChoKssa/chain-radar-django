@@ -137,7 +137,7 @@ python manage.py runserver
 
 ## 👤 User Authentication
 
-The application includes registration, login, and logout functionality using Django’s built-in authentication system.
+The application includes registration, login, and logout functionality using Django's built-in authentication system.
 
 - Regular users can register and log in through the frontend.
 - Staff users can be promoted via Django Admin (`is_staff=True`).
