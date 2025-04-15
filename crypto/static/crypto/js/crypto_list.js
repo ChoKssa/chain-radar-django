@@ -58,46 +58,43 @@ function formatNumber(n) {
 	return '$' + parseFloat(n).toFixed(2);
 }
 
-const getCryptos = () => {
-	const tableBody = document.querySelector('#crypto-table tbody');
-	tableBody.innerHTML = `<tr><td colspan="5" style="text-align:center;">Loading...</td></tr>`;
+function getCryptos() {
+	const tableBody = $('#crypto-table tbody');
+	tableBody.html('<tr><td colspan="5" style="text-align:center;">Loading...</td></tr>');
 
-	fetch('/api/cryptos/')
-		.then(res => res.json())
-		.then(data => {
-			tableBody.innerHTML = '';
+	$.ajax({
+		type: "GET",
+		url: "/api/cryptos/",
+		dataType: "json",
+		success: function(data) {
+			tableBody.empty();
 
 			if (data.cryptos.length === 0) {
-				tableBody.innerHTML = `<tr><td colspan="5" style="text-align:center;">No data available.</td></tr>`;
+				tableBody.html('<tr><td colspan="5" style="text-align:center;">No data available.</td></tr>');
 				return;
 			}
 
 			data.cryptos.forEach(c => {
-				const tr = document.createElement('tr');
-				tr.style.cursor = 'pointer';
-				tr.onclick = () => window.location.href = `/cryptos/${c.id}/`;
-
-				tr.innerHTML = `
-					<td style="display:flex; align-items:center; gap:10px;">
-						<img src="${c.logo || '/static/images/default-crypto.png'}" width="24" height="24" style="border-radius:50%; object-fit:contain;">
-						<span class="crypto-name">${c.name} <small style="color:#888;">(${c.symbol})</small></span>
-					</td>
-					<td>${formatNumber(c.price)}</td>
-					<td class="${c.change_24h > 0 ? 'green' : 'red'}">${formatNumber(c.change_24h)}%</td>
-					<td>${formatNumber(c.market_cap)}</td>
-					<td>${formatNumber(c.volume_24h)}</td>
+				const row = `
+					<tr style="cursor:pointer;" onclick="window.location.href='/cryptos/${c.id}/'">
+						<td style="display:flex; align-items:center; gap:10px;">
+							<img src="${c.logo || '/static/images/default-crypto.png'}" width="24" height="24" style="border-radius:50%; object-fit:contain;">
+							<span class="crypto-name">${c.name} <small style="color:#888;">(${c.symbol})</small></span>
+						</td>
+						<td>${formatNumber(c.price)}</td>
+						<td class="${c.change_24h > 0 ? 'green' : 'red'}">${formatNumber(c.change_24h)}%</td>
+						<td>${formatNumber(c.market_cap)}</td>
+						<td>${formatNumber(c.volume_24h)}</td>
+					</tr>
 				`;
-
-				tableBody.appendChild(tr);
+				tableBody.append(row);
 			});
-		})
-		.catch(err => {
-			console.error('Failed to load cryptos:', err);
-			tableBody.innerHTML = `<tr><td colspan="5" style="text-align:center;">Error loading data.</td></tr>`;
-		});
-};
-
-getCryptos();
+		},
+		error: function() {
+			tableBody.html('<tr><td colspan="5" style="text-align:center;">Error loading data.</td></tr>');
+		}
+	});
+}
 
 
 function validateCryptoForm(formData) {
@@ -128,44 +125,45 @@ function validateCryptoForm(formData) {
 	return true;
 }
 
-function addCrypto(form) {
-	fetch('/api/cryptos/add/', {
-		method: 'POST',
-		headers: {
-			'X-Requested-With': 'XMLHttpRequest',
-            'X-CSRFToken': csrftoken
+function addCrypto(formData) {
+	$.ajax({
+		url: '/api/cryptos/add/',
+		type: 'POST',
+		headers: { 'X-CSRFToken': csrftoken },
+		data: formData,
+		processData: false,
+		contentType: false,
+		success: function(data) {
+			const errorDiv = $('#form-error-message');
+			if (data.success) {
+				$('#crypto-form')[0].reset();
+				$('#crypto-form-container').hide();
+				getCryptos();
+			} else {
+				errorDiv.text(data.error || 'Failed to add crypto.');
+			}
 		},
-		body: formData
-	})
-	.then(res => res.json())
-	.then(data => {
-        const errorDiv = document.getElementById('form-error-message');
-        errorDiv.textContent = data.error || 'Failed to add crypto.';
-
-		if (data.success) {
-			form.reset();
-			document.getElementById('crypto-form-container').style.display = 'none';
-			getCryptos();
-		} else {
-            errorDiv.textContent = data.error || 'Failed to add crypto.';
+		error: function(xhr) {
+			console.error('Error:', xhr);
+			$('#form-error-message').text('An error occurred while submitting the form.');
 		}
-	})
-	.catch(err => {
-		console.error('Error:', err);
-		const errorDiv = document.getElementById('form-error-message');
-	    errorDiv.textContent = 'An error occurred while submitting the form.';
 	});
 }
 
-const form = document.getElementById('crypto-form');
-form?.addEventListener('submit', (e) => {
-	e.preventDefault();
+$(document).ready(() => {
+	getCryptos();
 
-	const formData = new FormData(form);
+	const $form = $('#crypto-form');
 
-	if (!validateCryptoForm(formData)) {
-		return;
-	}
+	$form.on('submit', function (e) {
+		e.preventDefault();
 
-	addCrypto(formData);
+		const formData = new FormData(this);
+
+		if (!validateCryptoForm(formData)) {
+			return;
+		}
+
+		addCrypto(formData);
+	});
 });
