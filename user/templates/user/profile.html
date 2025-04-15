@@ -4,12 +4,15 @@
 {% block title %}ChainRadar - Profile{% endblock %}
 
 {% block styles %}
+<!-- Load custom CSS for the user profile page -->
 <link rel="stylesheet" href="{% static 'user/css/profile.css' %}" />
 {% endblock %}
 
 {% block content %}
 <main class="profile-container">
 	<div class="profile-card">
+
+		<!-- User profile header with picture, username, and bio -->
 		<div class="profile-header">
 			{% if user.profile_picture %}
 				<img src="{{ user.profile_picture.url }}" alt="Profile Picture" class="profile-picture" />
@@ -20,6 +23,7 @@
 			<p>{{ user.short_bio }}</p>
 		</div>
 
+		<!-- Display user details -->
 		<div class="profile-info">
 			<p><strong>Email:</strong> {{ user.email }}</p>
 			<p><strong>Full Name:</strong> {{ user.first_name }} {{ user.last_name }}</p>
@@ -27,11 +31,14 @@
 			<p><strong>Date of Birth:</strong> {{ user.date_of_birth }}</p>
 			<p><strong>Gender:</strong> {{ user.get_gender_display }}</p>
 		</div>
+
+		<!-- Logout button -->
 		<form method="POST" action="{% url 'logout' %}">
 			{% csrf_token %}
 			<button type="submit" class="logout-btn">Logout</button>
 		</form>
 
+		<!-- List of followed cryptocurrencies -->
 		<div class="followed-cryptos">
             <h2>Followed Cryptocurrencies</h2>
             <ul>
